@@ -1,15 +1,12 @@
-
 {
-    "package": "com.example.examplemod.mixin",
+    "package": "",
     "required": true,
     "target": "@env(DEFAULT)",
     "minVersion": "0.8",
     "compatibilityLevel": "JAVA_8",
     "mixins": [],
     "server": [],
-    "client": [
-        "ExampleMixin"
-    ],
+    "client": [],
     "injectors": {
         "defaultRequire": 1
     }
