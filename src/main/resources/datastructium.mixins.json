@@ -4,9 +4,20 @@
     "target": "@env(DEFAULT)",
     "minVersion": "0.8",
     "compatibilityLevel": "JAVA_8",
-    "mixins": [],
+    "mixins": [
+        "MixinModelResourceLocation",
+        "data_struct.MixinCompoundTag",
+        "deduplicate.MixinCompoundTag",
+        "deduplicate.MixinResourceKey",
+        "deduplicate.MixinResourceLocation"
+    ],
     "server": [],
-    "client": [],
+    "client": [
+        "data_struct.MixinModelBakery",
+        "data_struct.MixinMultiPartBakedModel",
+        "data_struct.MixinSimpleBakedModel",
+        "deduplicate.MixinBakedQuads"
+    ],
     "injectors": {
         "defaultRequire": 1
     }
