@@ -1,5 +1,5 @@
 {
-    "package": "",
+    "package": "zank.mods.datastructium.mixin",
     "required": true,
     "target": "@env(DEFAULT)",
     "minVersion": "0.8",
