@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import zank.mods.datastructium.Pools;
+import zank.mods.datastructium.pools.Pools;
 import zank.mods.datastructium.api.ModelResourceLocationAccessor;
 
 import java.util.Arrays;

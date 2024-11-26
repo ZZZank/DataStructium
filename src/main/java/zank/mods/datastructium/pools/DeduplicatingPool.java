@@ -1,4 +1,4 @@
-package zank.mods.datastructium;
+package zank.mods.datastructium.pools;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.Getter;

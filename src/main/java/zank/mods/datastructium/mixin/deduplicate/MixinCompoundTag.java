@@ -4,7 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import zank.mods.datastructium.Pools;
+import zank.mods.datastructium.pools.Pools;
 
 /**
  * @author ZZZank
