@@ -1,24 +1,25 @@
 {
-    "package": "zank.mods.datastructium.mixin",
-    "required": true,
-    "target": "@env(DEFAULT)",
-    "minVersion": "0.8",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "MixinModelResourceLocation",
-        "data_struct.MixinCompoundTag",
-        "deduplicate.MixinCompoundTag",
-        "deduplicate.MixinResourceKey",
-        "deduplicate.MixinResourceLocation"
-    ],
-    "server": [],
-    "client": [
-        "data_struct.MixinModelBakery",
-        "data_struct.MixinMultiPartBakedModel",
-        "data_struct.MixinSimpleBakedModel",
-        "deduplicate.MixinBakedQuads"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+  "package": "zank.mods.datastructium.mixin",
+  "required": true,
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinModelResourceLocation",
+    "data_struct.MixinBlockPos",
+    "data_struct.MixinCompoundTag",
+    "deduplicate.MixinCompoundTag",
+    "deduplicate.MixinResourceKey",
+    "deduplicate.MixinResourceLocation"
+  ],
+  "server": [],
+  "client": [
+    "data_struct.MixinModelBakery",
+    "data_struct.MixinMultiPartBakedModel",
+    "data_struct.MixinSimpleBakedModel",
+    "deduplicate.MixinBakedQuads"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
