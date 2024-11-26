@@ -1,0 +1,32 @@
+vectors in total, -1 means default 1000000:
+-1
+x and z limits to in-range-of, -1 means default 262140:
+4000
+y limits to in-range-of, -1 means default 512:
+-1
+hasher: 'from loliasm' took 3395
+    hash collided: 137 times
+hasher: 'basic java' took 3086
+    hash collided: 119178 times
+hasher: 'xor java' took 1919
+    hash collided: 118892 times
+hasher: 'phi mix x' took 1985
+    hash collided: 7176 times
+hasher: 'phi mix y' took 2092
+    hash collided: 7692 times
+hasher: 'phi mix z' took 1981
+    hash collided: 1061 times
+hasher: 'phi mix (31 * x + y)' took 1908
+    hash collided: 973 times
+hasher: 'mojang' took 1690
+    hash collided: 119482 times
+hasher: 'paring fn + y' took 1636
+    hash collided: 29249 times
+hasher: 'dual paring fn' took 2303
+    hash collided: 291 times
+hasher: 'dual phi mix' took 2124
+    hash collided: 172 times
+hasher: 'phi mix x ^ phi mix z' took 1910
+    hash collided: 528 times
+hasher: 'phi mix 31x+z' took 1695
+    hash collided: 7694 times
