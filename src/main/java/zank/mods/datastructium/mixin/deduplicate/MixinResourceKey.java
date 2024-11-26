@@ -12,7 +12,7 @@ import zank.mods.datastructium.pools.Pools;
  * @author ZZZank
  */
 @Mixin(value = ResourceKey.class, priority = 345)
-public class MixinResourceKey {
+public abstract class MixinResourceKey {
 
     @Mutable
     @Shadow

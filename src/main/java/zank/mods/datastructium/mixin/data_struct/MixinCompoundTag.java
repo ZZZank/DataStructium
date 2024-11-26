@@ -18,7 +18,7 @@ import java.util.Map;
  * @author ZZZank
  */
 @Mixin(value = CompoundTag.class, priority = 456)
-public class MixinCompoundTag {
+public abstract class MixinCompoundTag {
 
     @Mutable
     @Shadow

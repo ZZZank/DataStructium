@@ -23,7 +23,7 @@ import java.util.Map;
  * @author ZZZank
  */
 @Mixin(SimpleBakedModel.class)
-public class MixinSimpleBakedModel {
+public abstract class MixinSimpleBakedModel {
 
     @Mutable
     @Shadow

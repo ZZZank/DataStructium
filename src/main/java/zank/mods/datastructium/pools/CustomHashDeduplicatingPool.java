@@ -29,7 +29,7 @@ public final class CustomHashDeduplicatingPool<T> {
         return pool.addOrGet(o);
     }
 
-    public final void clear() {
+    public void clear() {
         if (accessed >= 0) {
             accessed = 0;
         }

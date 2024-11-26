@@ -17,7 +17,7 @@ import zank.mods.datastructium.pools.Pools;
  * @author ZZZank
  */
 @Mixin(value = BakedQuad.class, priority = 345)
-public class MixinBakedQuads {
+public abstract class MixinBakedQuads {
 
     @Mutable
     @Shadow

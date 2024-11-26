@@ -10,7 +10,7 @@ import zank.mods.datastructium.pools.Pools;
  * @author ZZZank
  */
 @Mixin(value = CompoundTag.class, priority = 345)
-public class MixinCompoundTag {
+public abstract class MixinCompoundTag {
 
     @ModifyArg(
         method = {"put", "putByte", "putShort", "putInt", "putLong", "putUUID", "putFloat",
