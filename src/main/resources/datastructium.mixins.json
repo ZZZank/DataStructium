@@ -8,7 +8,6 @@
     "MixinModelResourceLocation",
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
-    "deduplicate.MixinCompoundTag",
     "deduplicate.MixinResourceKey",
     "deduplicate.MixinResourceLocation"
   ],
