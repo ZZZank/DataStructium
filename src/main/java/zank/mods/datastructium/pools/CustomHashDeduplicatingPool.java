@@ -18,7 +18,7 @@ public final class CustomHashDeduplicatingPool<T> {
     }
 
     public CustomHashDeduplicatingPool(Hash.Strategy<T> strategy, boolean recordAccess) {
-        pool = new ObjectOpenCustomHashSet<>(strategy);
+        pool = new ObjectOpenCustomHashSet<>(256, strategy);
         accessed = recordAccess ? 0 : -1;
     }
 

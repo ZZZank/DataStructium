@@ -1,15 +1,13 @@
 package zank.mods.datastructium.pools;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 /**
  * @author ZZZank
  */
 public final class DeduplicatingPool<T> {
 
-    private final ObjectOpenHashSet<T> pool = new ObjectOpenHashSet<>();
-    @Getter
+    private final ObjectOpenHashSet<T> pool = new ObjectOpenHashSet<>(256);
     private long accessed;
 
     public DeduplicatingPool() {
