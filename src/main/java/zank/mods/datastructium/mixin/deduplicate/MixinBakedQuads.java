@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.pools.Pools;
 
 /**
@@ -32,6 +33,8 @@ public class MixinBakedQuads {
         boolean bl,
         CallbackInfo ci
     ) {
-        this.vertices = Pools.QUADS.unique(this.vertices);
+        if (DSConfig.dedupQuads) {
+            this.vertices = Pools.QUADS.unique(this.vertices);
+        }
     }
 }
