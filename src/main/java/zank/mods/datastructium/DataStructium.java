@@ -2,7 +2,6 @@ package zank.mods.datastructium;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +18,5 @@ public class DataStructium {
         .create();
 
     public DataStructium() {
-        ForgeConfig f;
     }
 }
