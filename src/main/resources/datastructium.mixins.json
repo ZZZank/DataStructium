@@ -5,7 +5,6 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinModelResourceLocation",
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
     "deduplicate.MixinResourceKey",
