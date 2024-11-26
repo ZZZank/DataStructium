@@ -18,5 +18,6 @@ public class DataStructium {
         .create();
 
     public DataStructium() {
+        DSConfig.save();
     }
 }

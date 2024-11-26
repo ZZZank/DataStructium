@@ -1,6 +1,7 @@
 package zank.mods.datastructium;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.val;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -23,9 +24,14 @@ public final class DSConfig {
         cacheShaderUniforms = snapshot.cacheShaderUniforms;
     }
 
+    @AllArgsConstructor
     private static class Snapshot {
-        public final boolean dedupQuads = false;
-        public final boolean cacheShaderUniforms = true;
+        public final boolean dedupQuads;
+        public final boolean cacheShaderUniforms;
+
+        public Snapshot() {
+            this(false, true);
+        }
     }
 
     @NotNull
@@ -39,6 +45,16 @@ public final class DSConfig {
         } catch (IOException e) {
             DataStructium.LOGGER.error("unable to read config", e);
             return new Snapshot();
+        }
+    }
+
+    static void save() {
+        val snapshot = new Snapshot(dedupQuads, cacheShaderUniforms);
+        val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
+        try (val writer = Files.newBufferedWriter(path)) {
+            DataStructium.GSON.toJson(snapshot, writer);
+        } catch (IOException e) {
+            DataStructium.LOGGER.error("unable to write config", e);
         }
     }
 }
