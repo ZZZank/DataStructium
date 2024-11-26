@@ -15,14 +15,17 @@ import java.nio.file.Files;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DSConfig {
     public static final boolean dedupQuads;
+    public static final boolean cacheShaderUniforms;
 
     static {
         val snapshot = readFromFile();
         dedupQuads = snapshot.dedupQuads;
+        cacheShaderUniforms = snapshot.cacheShaderUniforms;
     }
 
     private static class Snapshot {
-        public final boolean dedupQuads = true;
+        public final boolean dedupQuads = false;
+        public final boolean cacheShaderUniforms = true;
     }
 
     @NotNull
