@@ -15,6 +15,10 @@ public class CachedTags {
     private static final DoubleTag[] TAG_DOUBLES = new DoubleTag[65536];
 
     private static final float EPSILON = 0.0000001F;
+    /**
+     * https://0.30000000000000004.com/
+     */
+    private static final double EPSILON_DOUBLE = 0.0000000000000004;
 
     public static final int SHORT_OFFSET = 32768;
     public static final int MINIMUM = -32768;
@@ -43,6 +47,6 @@ public class CachedTags {
     }
 
     public static boolean isDoubleInteger(double value) {
-        return Math.abs(value - Math.round(value)) < EPSILON;
+        return Math.abs(value - Math.round(value)) < EPSILON_DOUBLE;
     }
 }
