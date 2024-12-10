@@ -12,7 +12,7 @@ public final class ShaderCacheLoader {
 
     public static void reload(String log) {
         RenderSystem.assertThread(RenderSystem::isOnRenderThread);
-        if (!DSConfig.cacheShaderUniforms) {
+        if (!DSConfig.CACHE_SHADER_UNIFORMS) {
             return;
         }
 

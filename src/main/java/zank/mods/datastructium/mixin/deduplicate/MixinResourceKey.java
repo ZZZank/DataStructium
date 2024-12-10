@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.pools.Pools;
 
 /**
@@ -25,8 +26,10 @@ public abstract class MixinResourceKey {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void deduplicate(ResourceLocation registry, ResourceLocation location, CallbackInfo ci) {
-        this.registryName = Pools.REGISTRY_KEYS.unique(this.registryName);
-        this.location = Pools.REGISTRY_LOCATIONS.unique(this.location);
+        if (DSConfig.CANONICALIZE_RESOURCE_KEY) {
+            this.registryName = Pools.REGISTRY_KEYS.unique(this.registryName);
+            this.location = Pools.REGISTRY_LOCATIONS.unique(this.location);
+        }
     }
 
     @Override

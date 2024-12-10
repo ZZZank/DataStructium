@@ -13,7 +13,7 @@ public abstract class GLStateManagerMixin {
 
     @Inject(method = "_glGetUniformLocation", at = @At("RETURN"), cancellable = true)
     private static void getUniform(int u, CharSequence sequence, CallbackInfoReturnable<Integer> cir) {
-        if (DSConfig.cacheShaderUniforms) {
+        if (DSConfig.CACHE_SHADER_UNIFORMS) {
             cir.setReturnValue(ShaderCacheLoader.uniform(u, sequence));
         }
     }

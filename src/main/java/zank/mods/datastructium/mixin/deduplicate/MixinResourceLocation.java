@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.pools.Pools;
 
 /**
@@ -27,7 +28,9 @@ public abstract class MixinResourceLocation {
 
     @Inject(method = "<init>([Ljava/lang/String;)V", at = @At("RETURN"))
     private void replaceKeys(String[] id, CallbackInfo ci) {
-        this.namespace = Pools.NAMESPACES.unique(this.namespace);
-        this.path = Pools.RL_PATHS.unique(this.path);
+        if (DSConfig.CANONICALIZE_RESOURCE_LOCATION) {
+            this.namespace = Pools.NAMESPACES.unique(this.namespace);
+            this.path = Pools.RL_PATHS.unique(this.path);
+        }
     }
 }

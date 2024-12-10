@@ -33,7 +33,7 @@ public abstract class MixinBakedQuads {
         boolean bl,
         CallbackInfo ci
     ) {
-        if (DSConfig.dedupQuads) {
+        if (DSConfig.CANONICALIZE_QUADS) {
             this.vertices = Pools.QUADS.unique(this.vertices);
         }
     }
