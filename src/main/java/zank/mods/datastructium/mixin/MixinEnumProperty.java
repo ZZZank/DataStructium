@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.data_struct;
+package zank.mods.datastructium.mixin;
 
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.spongepowered.asm.mixin.Mixin;

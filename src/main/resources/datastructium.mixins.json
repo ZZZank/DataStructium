@@ -5,9 +5,10 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinEnumProperty",
+    "MixinScanner",
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
-    "data_struct.MixinEnumProperty",
     "deduplicate.MixinDoubleTag",
     "deduplicate.MixinFloatTag",
     "deduplicate.MixinResourceKey",
