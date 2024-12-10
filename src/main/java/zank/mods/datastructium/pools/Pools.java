@@ -4,6 +4,8 @@ import it.unimi.dsi.fastutil.ints.IntArrays;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.resources.ResourceLocation;
+import zank.mods.datastructium.utils.pool.CustomHashDeduplicatingPool;
+import zank.mods.datastructium.utils.pool.DeduplicatingPool;
 
 /**
  * @author ZZZank

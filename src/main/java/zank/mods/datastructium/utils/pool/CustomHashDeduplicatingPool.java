@@ -1,4 +1,4 @@
-package zank.mods.datastructium.pools;
+package zank.mods.datastructium.utils.pool;
 
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
