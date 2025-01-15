@@ -29,8 +29,8 @@ public abstract class MixinResourceLocation {
     @Inject(method = "<init>([Ljava/lang/String;)V", at = @At("RETURN"))
     private void replaceKeys(String[] id, CallbackInfo ci) {
         if (DSConfig.CANONICALIZE_RESOURCE_LOCATION) {
-            this.namespace = Pools.NAMESPACES.unique(this.namespace);
-            this.path = Pools.RL_PATHS.unique(this.path);
+            Pools.NAMESPACES.offer(this.namespace, r -> this.namespace = r);
+            Pools.RL_PATHS.offer(this.path, r -> this.path = r);
         }
     }
 }
