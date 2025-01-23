@@ -5,16 +5,14 @@ import lombok.val;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import zank.mods.datastructium.mods.masterfulmachinery.MachineStructureRecipeDataExtension;
 
 /**
  * @author ZZZank
  */
 @Mixin(value = MachineStructureRecipeData.class, remap = false)
+@Pseudo
 public abstract class MixinMachineStructureRecipeData implements MachineStructureRecipeDataExtension {
     @Unique
     private String[] dataStruct$colonSplitTag;
