@@ -13,6 +13,7 @@ public class CachedTags {
 
     private static final FloatTag[] TAG_FLOATS = new FloatTag[65536];
     private static final DoubleTag[] TAG_DOUBLES = new DoubleTag[65536];
+    private static final IntTag[] TAG_INTS = new IntTag[65536];
 
     private static final float EPSILON = 0.0000001F;
     /**
@@ -26,8 +27,16 @@ public class CachedTags {
 
     static {
         val start = System.currentTimeMillis();
-        Arrays.setAll(TAG_FLOATS, i -> FloatTag.valueOf(i - SHORT_OFFSET));
-        Arrays.setAll(TAG_DOUBLES, i -> DoubleTag.valueOf(i - SHORT_OFFSET));
+        Arrays.setAll(TAG_FLOATS, i -> new FloatTag(i - SHORT_OFFSET));
+        Arrays.setAll(TAG_DOUBLES, i -> new DoubleTag(i - SHORT_OFFSET));
+        Arrays.setAll(TAG_INTS, i -> new IntTag(i - SHORT_OFFSET));
+        val end = System.currentTimeMillis();
+    }
+
+    public static IntTag ofInt(final int i) {
+        return i < MINIMUM || i > MAXIMUM
+            ? new IntTag(i)
+            : TAG_INTS[i + SHORT_OFFSET];
     }
 
     public static FloatTag ofFloat(final float f) {
