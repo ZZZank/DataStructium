@@ -1,0 +1,16 @@
+{
+    "package": "zank.mods.datastructium.mixin.mods",
+    "required": true,
+    "target": "@env(DEFAULT)",
+    "minVersion": "0.8",
+    "compatibilityLevel": "JAVA_8",
+    "plugin": "zank.mods.datastructium.mixin.mods.ModsMixinPlugin",
+    "mixins": [],
+    "server": [],
+    "client": [
+        "industrialforegoing.MixinJEICustomPlugin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

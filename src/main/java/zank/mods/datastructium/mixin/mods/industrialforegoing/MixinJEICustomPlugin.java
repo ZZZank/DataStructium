@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.industrialforegoing;
+package zank.mods.datastructium.mixin.mods.industrialforegoing;
 
 import com.buuz135.industrial.block.resourceproduction.tile.MaterialStoneWorkFactoryTile;
 import com.buuz135.industrial.plugin.jei.JEICustomPlugin;
