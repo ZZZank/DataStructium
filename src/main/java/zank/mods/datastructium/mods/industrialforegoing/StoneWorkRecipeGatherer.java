@@ -10,15 +10,15 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author ZZZank
  */
-public class StoneWorkRecipeGatherer {
+public final class StoneWorkRecipeGatherer {
     private final MaterialStoneWorkFactoryTile.StoneWorkAction[] actions;
     private final ClientLevel level;
+    private List<StoneWorkCategory.Wrapper> toFill;
 
     public StoneWorkRecipeGatherer() {
         actions = Arrays.stream(MaterialStoneWorkFactoryTile.ACTION_RECIPES)
@@ -27,22 +27,14 @@ public class StoneWorkRecipeGatherer {
         level = Minecraft.getInstance().level;
     }
 
-    public List<StoneWorkCategory.Wrapper> findAllStoneWorkOutputs(
-        ItemStack parent,
-        List<MaterialStoneWorkFactoryTile.StoneWorkAction> usedModes
-    ) {
-        return findAllStoneWorkOutputs(parent, parent, usedModes);
-    }
-
-    public List<StoneWorkCategory.Wrapper> findAllStoneWorkOutputs(
+    private void fillStoneWorkRecipe(
         ItemStack input,
         ItemStack lastOutput,
         List<MaterialStoneWorkFactoryTile.StoneWorkAction> usedModes
     ) {
         if (usedModes.size() >= 4) {
-            return Collections.emptyList();
+            return;
         }
-        val wrappers = new ArrayList<StoneWorkCategory.Wrapper>();
         for (val mode : actions) {
             val output = this.applyWork(lastOutput, mode);
 
@@ -52,15 +44,23 @@ public class StoneWorkRecipeGatherer {
                 usedModesStepped.addAll(usedModes);
                 usedModesStepped.add(mode);
 
-                wrappers.add(new StoneWorkCategory.Wrapper(
+                toFill.add(new StoneWorkCategory.Wrapper(
                     input,
                     new ArrayList<>(usedModesStepped),
                     output.copy()
                 ));
-                wrappers.addAll(this.findAllStoneWorkOutputs(input, output, usedModesStepped));
+                fillStoneWorkRecipe(input, output, usedModesStepped);
             }
         }
-        return wrappers;
+    }
+
+    public List<StoneWorkCategory.Wrapper> findAllStoneWorkOutputs(
+        ItemStack input,
+        List<MaterialStoneWorkFactoryTile.StoneWorkAction> usedModes
+    ) {
+        toFill = new ArrayList<>();
+        fillStoneWorkRecipe(input, input, usedModes);
+        return toFill;
     }
 
     private ItemStack applyWork(ItemStack stack, MaterialStoneWorkFactoryTile.StoneWorkAction mode) {
