@@ -18,17 +18,11 @@ import java.nio.file.Files;
 public final class DSConfig {
     public static final boolean CANONICALIZE_QUADS;
     public static final boolean CACHE_SHADER_UNIFORMS;
-    public static final boolean CANONICALIZE_RESOURCE_LOCATION;
-    public static final boolean CANONICALIZE_MODEL_RESOURCE_LOCATION;
-    public static final boolean CANONICALIZE_RESOURCE_KEY;
 
     static {
         val snapshot = readFromFile();
         CANONICALIZE_QUADS = snapshot.canonicalizeQuads;
         CACHE_SHADER_UNIFORMS = snapshot.cacheShaderUniforms;
-        CANONICALIZE_RESOURCE_LOCATION = snapshot.canonicalizeResourceLocation;
-        CANONICALIZE_MODEL_RESOURCE_LOCATION = snapshot.canonicalizeModelResourceLocation;
-        CANONICALIZE_RESOURCE_KEY = snapshot.canonicalizeResourceKey;
     }
 
     @AllArgsConstructor
@@ -37,20 +31,10 @@ public final class DSConfig {
         public final boolean canonicalizeQuads;
         @SerializedName("Cache Shader Uniforms")
         public final boolean cacheShaderUniforms;
-        @SerializedName("Canonicalize ResourceLocation")
-        public final boolean canonicalizeResourceLocation;
-        @SerializedName("Canonicalize ModelResourceLocation")
-        public final boolean canonicalizeModelResourceLocation;
-        @SerializedName("Canonicalize ResourceKey")
-        public final boolean canonicalizeResourceKey;
-
         public Snapshot() {
             this(
                 false,
-                true,
-                false,
-                false,
-                false
+                true
             );
         }
     }
@@ -72,10 +56,7 @@ public final class DSConfig {
     static void save() {
         val snapshot = new Snapshot(
             CANONICALIZE_QUADS,
-            CACHE_SHADER_UNIFORMS,
-            CANONICALIZE_RESOURCE_LOCATION,
-            CANONICALIZE_MODEL_RESOURCE_LOCATION,
-            CANONICALIZE_RESOURCE_KEY
+            CACHE_SHADER_UNIFORMS
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
