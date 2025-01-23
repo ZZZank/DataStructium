@@ -45,7 +45,13 @@ public final class DSConfig {
         public final boolean canonicalizeResourceKey;
 
         public Snapshot() {
-            this(false, true, false, false, false);
+            this(
+                false,
+                true,
+                false,
+                false,
+                false
+            );
         }
     }
 

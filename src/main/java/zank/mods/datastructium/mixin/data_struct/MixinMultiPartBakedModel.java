@@ -29,6 +29,7 @@ public abstract class MixinMultiPartBakedModel {
     @Shadow
     @Final
     private Map<BlockState, BitSet> selectorCache;
+
     @Mutable
     @Shadow
     @Final
@@ -36,7 +37,7 @@ public abstract class MixinMultiPartBakedModel {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     public void replaceInternal(List<Pair<Predicate<BlockState>, BakedModel>> list, CallbackInfo ci) {
-        this.selectorCache = new Reference2ObjectOpenHashMap<>();
+        this.selectorCache = new Reference2ObjectOpenHashMap<>(this.selectorCache);
         this.selectors = ImmutableList.copyOf(this.selectors);
     }
 }

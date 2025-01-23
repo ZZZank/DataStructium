@@ -19,6 +19,7 @@ public abstract class MixinResourceKey {
     @Shadow
     @Final
     private ResourceLocation registryName;
+
     @Mutable
     @Shadow
     @Final
@@ -30,10 +31,5 @@ public abstract class MixinResourceKey {
             this.registryName = Pools.REGISTRY_KEYS.unique(this.registryName);
             this.location = Pools.REGISTRY_LOCATIONS.unique(this.location);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return 31 * registryName.hashCode() + location.hashCode();
     }
 }

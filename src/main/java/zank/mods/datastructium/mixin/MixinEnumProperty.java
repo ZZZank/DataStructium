@@ -24,7 +24,7 @@ public class MixinEnumProperty {
     }
 
     @Inject(method = "generateHashCode", at = @At("RETURN"))
-    public void cacheHash(CallbackInfoReturnable<Integer> cir) {
+    public void captureHash(CallbackInfoReturnable<Integer> cir) {
         dataStruct$cachedHash = cir.getReturnValue();
     }
 }
