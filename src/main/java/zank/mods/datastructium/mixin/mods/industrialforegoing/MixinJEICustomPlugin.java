@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author ZZZank
  */
-@Mixin(value = JEICustomPlugin.class, remap = false)
+@Mixin(value = JEICustomPlugin.class)
 @Pseudo
 public abstract class MixinJEICustomPlugin {
 
@@ -30,7 +30,13 @@ public abstract class MixinJEICustomPlugin {
         return instance;
     }
 
-    @Redirect(method = "registerRecipes", at = @At(value = "INVOKE", target = "Lcom/buuz135/industrial/plugin/jei/JEICustomPlugin;findAllStoneWorkOutputs(Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)Ljava/util/List;"))
+    @Redirect(
+        method = "registerRecipes",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/buuz135/industrial/plugin/jei/JEICustomPlugin;findAllStoneWorkOutputs(Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)Ljava/util/List;"
+        )
+    )
     private List<StoneWorkCategory.Wrapper> replaceStoneWorkRecipeGathering(
         JEICustomPlugin instance,
         ItemStack input,
