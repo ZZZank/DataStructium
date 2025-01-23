@@ -5,7 +5,10 @@
     "minVersion": "0.8",
     "compatibilityLevel": "JAVA_8",
     "plugin": "zank.mods.datastructium.mixin.mods.ModsMixinPlugin",
-    "mixins": [],
+    "mixins": [
+        "masterfulmachinery.MixinMachineStructureRecipe",
+        "masterfulmachinery.MixinMachineStructureRecipeData"
+    ],
     "server": [],
     "client": [
         "industrialforegoing.MixinJEICustomPlugin"
