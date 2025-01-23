@@ -23,10 +23,16 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    maven {
+        name 'ModMaven'
+        url "https://modmaven.dev"
+    }
     mavenLocal() // Must be last for caching to work
 }
 
 dependencies {
+    modCompileOnly("mezz.jei:jei-1.16.5:7.8.0.1013")
+    modCompileOnly("curse.maven:industrial-foregoing-266515:5334823")
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
     // will cause loom to remap the file to your specified mappings
