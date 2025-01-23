@@ -10,9 +10,7 @@
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
     "deduplicate.MixinDoubleTag",
-    "deduplicate.MixinFloatTag",
-    "deduplicate.MixinResourceKey",
-    "deduplicate.MixinResourceLocation"
+    "deduplicate.MixinFloatTag"
   ],
   "server": [],
   "client": [
