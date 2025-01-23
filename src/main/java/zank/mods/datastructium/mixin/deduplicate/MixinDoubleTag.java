@@ -18,7 +18,6 @@ public class MixinDoubleTag {
      */
     @Overwrite
     public static DoubleTag valueOf(double data) {
-        val cached = CachedTags.getCachedDouble(data);
-        return cached == null ? new DoubleTag(data) : cached;
+        return CachedTags.ofDouble(data);
     }
 }

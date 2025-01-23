@@ -1,6 +1,5 @@
 package zank.mods.datastructium.mixin.deduplicate;
 
-import lombok.val;
 import net.minecraft.nbt.FloatTag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -18,7 +17,6 @@ public class MixinFloatTag {
      */
     @Overwrite
     public static FloatTag valueOf(float data) {
-        val cached = CachedTags.getCachedFloat(data);
-        return cached == null ? new FloatTag(data) : cached;
+        return CachedTags.ofFloat(data);
     }
 }

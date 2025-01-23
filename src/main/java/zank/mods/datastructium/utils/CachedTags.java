@@ -30,15 +30,15 @@ public class CachedTags {
         Arrays.setAll(TAG_DOUBLES, i -> DoubleTag.valueOf(i - SHORT_OFFSET));
     }
 
-    public static @Nullable FloatTag getCachedFloat(final float f) {
+    public static FloatTag ofFloat(final float f) {
         return !isFloatInteger(f) || f < MINIMUM || f > MAXIMUM
-            ? null
+            ? new FloatTag(f)
             : TAG_FLOATS[(int) f + SHORT_OFFSET];
     }
 
-    public static @Nullable DoubleTag getCachedDouble(final double d) {
+    public static DoubleTag ofDouble(final double d) {
         return !isDoubleInteger(d) || d < MINIMUM || d > MAXIMUM
-            ? null
+            ? new DoubleTag(d)
             : TAG_DOUBLES[(int) d + SHORT_OFFSET];
     }
 
