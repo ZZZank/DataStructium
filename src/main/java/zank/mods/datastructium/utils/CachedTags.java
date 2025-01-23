@@ -16,7 +16,7 @@ public class CachedTags {
 
     private static final float EPSILON = 0.0000001F;
     /**
-     * https://0.30000000000000004.com/
+     * <a href="https://0.30000000000000004.com/">0.30000000000000004.com</a>
      */
     private static final double EPSILON_DOUBLE = 0.0000000000000004;
 

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author ZZZank
  */
-@Mixin(MachineStructureRecipe.class)
+@Mixin(value = MachineStructureRecipe.class, remap = false)
 @Pseudo
 public abstract class MixinMachineStructureRecipe {
 
