@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import lombok.val;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
@@ -14,12 +15,12 @@ import java.nio.file.Files;
 /**
  * @author ZZZank
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class DSConfig {
-    public static final boolean CANONICALIZE_QUADS;
-    public static final boolean CACHE_SHADER_UNIFORMS;
-    public static final boolean TIERED_COMPOUND_TAG_INTERNAL;
-    public static final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
+    public final boolean CANONICALIZE_QUADS;
+    public final boolean CACHE_SHADER_UNIFORMS;
+    public final boolean TIERED_COMPOUND_TAG_INTERNAL;
+    public final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
 
     static {
         val snapshot = readFromFile();

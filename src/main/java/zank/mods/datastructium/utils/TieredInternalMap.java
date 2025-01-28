@@ -3,6 +3,7 @@ package zank.mods.datastructium.utils;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lombok.val;
+import org.jetbrains.annotations.NotNull;
 import zank.mods.datastructium.DSConfig;
 
 import javax.annotation.Nonnull;
@@ -10,8 +11,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-public class TieredInternalMap<K, V> implements Map<K, V> {
+public final class TieredInternalMap<K, V> implements Map<K, V> {
 
+    @NotNull
     private Map<K, V> internal = new Object2ObjectArrayMap<>();
 
     @Override
