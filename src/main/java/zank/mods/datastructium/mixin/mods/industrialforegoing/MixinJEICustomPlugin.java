@@ -20,17 +20,6 @@ import java.util.List;
 public abstract class MixinJEICustomPlugin {
 
     @Redirect(
-        method = "getStoneWorkOutputFrom(Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)Lnet/minecraft/world/item/ItemStack;",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/item/ItemStack;copy()Lnet/minecraft/world/item/ItemStack;"
-        )
-    )
-    private ItemStack cancelCopy(ItemStack instance) {
-        return instance;
-    }
-
-    @Redirect(
         method = "registerRecipes",
         at = @At(
             value = "INVOKE",

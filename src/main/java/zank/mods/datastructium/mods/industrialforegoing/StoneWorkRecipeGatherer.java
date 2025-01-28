@@ -4,7 +4,6 @@ import com.buuz135.industrial.block.resourceproduction.tile.MaterialStoneWorkFac
 import com.buuz135.industrial.plugin.jei.category.StoneWorkCategory;
 import lombok.val;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -16,16 +15,11 @@ import java.util.List;
  * @author ZZZank
  */
 public final class StoneWorkRecipeGatherer {
-    private final MaterialStoneWorkFactoryTile.StoneWorkAction[] actions;
-    private final ClientLevel level;
-    private List<StoneWorkCategory.Wrapper> toFill;
-
-    public StoneWorkRecipeGatherer() {
-        actions = Arrays.stream(MaterialStoneWorkFactoryTile.ACTION_RECIPES)
-            .filter(ac -> !ac.getAction().equals("none"))
-            .toArray(MaterialStoneWorkFactoryTile.StoneWorkAction[]::new);
-        level = Minecraft.getInstance().level;
-    }
+    private final MaterialStoneWorkFactoryTile.StoneWorkAction[] actions = Arrays
+        .stream(MaterialStoneWorkFactoryTile.ACTION_RECIPES)
+        .filter(ac -> !ac.getAction().equals("none"))
+        .toArray(MaterialStoneWorkFactoryTile.StoneWorkAction[]::new);
+    private final List<StoneWorkCategory.Wrapper> toFill = new ArrayList<>();
 
     private void fillStoneWorkRecipe(
         ItemStack input,
@@ -58,12 +52,13 @@ public final class StoneWorkRecipeGatherer {
         ItemStack input,
         List<MaterialStoneWorkFactoryTile.StoneWorkAction> usedModes
     ) {
-        toFill = new ArrayList<>();
-        fillStoneWorkRecipe(input, input, usedModes);
+        if (toFill.isEmpty()) {
+            fillStoneWorkRecipe(input, input, usedModes);
+        }
         return toFill;
     }
 
     private ItemStack applyWork(ItemStack stack, MaterialStoneWorkFactoryTile.StoneWorkAction mode) {
-        return mode.getWork().apply(level, ItemHandlerHelper.copyStackWithSize(stack, 9));
+        return mode.getWork().apply(Minecraft.getInstance().level, ItemHandlerHelper.copyStackWithSize(stack, 9));
     }
 }
