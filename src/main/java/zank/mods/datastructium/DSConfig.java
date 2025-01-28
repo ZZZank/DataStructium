@@ -18,25 +18,28 @@ import java.nio.file.Files;
 public final class DSConfig {
     public static final boolean CANONICALIZE_QUADS;
     public static final boolean CACHE_SHADER_UNIFORMS;
+    public static final boolean TIERED_COMPOUND_TAG_INTERNAL;
+    public static final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
 
     static {
         val snapshot = readFromFile();
-        CANONICALIZE_QUADS = snapshot.canonicalizeQuads;
-        CACHE_SHADER_UNIFORMS = snapshot.cacheShaderUniforms;
+        CANONICALIZE_QUADS = snapshot.CANONICALIZE_QUADS;
+        CACHE_SHADER_UNIFORMS = snapshot.CACHE_SHADER_UNIFORMS;
+        COMPOUND_TAG_RECONSTRUCT_THRESHOLD = snapshot.COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
+        TIERED_COMPOUND_TAG_INTERNAL = snapshot.TIERED_COMPOUND_TAG_INTERNAL;
     }
 
     @AllArgsConstructor
+    @NoArgsConstructor
     private static class Snapshot {
         @SerializedName("Canonicalize Quads")
-        public final boolean canonicalizeQuads;
+        public boolean CANONICALIZE_QUADS = false;
         @SerializedName("Cache Shader Uniforms")
-        public final boolean cacheShaderUniforms;
-        public Snapshot() {
-            this(
-                false,
-                true
-            );
-        }
+        public boolean CACHE_SHADER_UNIFORMS = true;
+        @SerializedName("Tiered Compound Tag Internal")
+        public boolean TIERED_COMPOUND_TAG_INTERNAL = true;
+        @SerializedName("Compound Tag Internal Reconstruct Threshold")
+        public int COMPOUND_TAG_RECONSTRUCT_THRESHOLD = 5;
     }
 
     @NotNull
@@ -56,7 +59,9 @@ public final class DSConfig {
     static void save() {
         val snapshot = new Snapshot(
             CANONICALIZE_QUADS,
-            CACHE_SHADER_UNIFORMS
+            CACHE_SHADER_UNIFORMS,
+            TIERED_COMPOUND_TAG_INTERNAL,
+            COMPOUND_TAG_RECONSTRUCT_THRESHOLD
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
