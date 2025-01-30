@@ -43,7 +43,7 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
 
     @Override
     public V put(K key, V value) {
-        if (this.size() == DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD) {
+        if (this.size() == DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD && internal instanceof Object2ObjectArrayMap) {
             internal = new Object2ObjectOpenHashMap<>(internal);
         }
         return internal.put(key, value);
@@ -81,7 +81,7 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public Set<Entry<K, V>> entrySet() {
+    public @NotNull Set<Entry<K, V>> entrySet() {
         return internal.entrySet();
     }
 
