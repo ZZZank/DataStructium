@@ -16,7 +16,7 @@ public abstract class MixinIntTag {
 
     @Inject(method = "valueOf", at = @At("HEAD"), cancellable = true)
     private static void replace(int data, CallbackInfoReturnable<IntTag> cir) {
-        if (DSConfig.ENABLE_NUMBER_TAG_CACHE) {
+        if (DSConfig.CACHE_NUMBER_TAG) {
             cir.setReturnValue(data < CachedTags.START || data >= CachedTags.END
                 ? new IntTag(data)
                 : CachedTags.getCachedInt(data));

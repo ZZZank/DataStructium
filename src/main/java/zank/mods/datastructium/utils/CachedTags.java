@@ -12,8 +12,8 @@ import java.util.Arrays;
  */
 public class CachedTags {
 
-    public static final int START = DSConfig.ENABLE_NUMBER_TAG_CACHE ? DSConfig.NUMBER_TAG_CACHE_START : 0;
-    public static final int END = DSConfig.ENABLE_NUMBER_TAG_CACHE ? DSConfig.NUMBER_TAG_CACHE_END : 0;
+    public static final int START = DSConfig.CACHE_NUMBER_TAG ? DSConfig.NUMBER_TAG_CACHE_START : 0;
+    public static final int END = DSConfig.CACHE_NUMBER_TAG ? DSConfig.NUMBER_TAG_CACHE_END : 0;
     public static final int SIZE = END - START;
 
     private static final FloatTag[] TAG_FLOATS = new FloatTag[SIZE];

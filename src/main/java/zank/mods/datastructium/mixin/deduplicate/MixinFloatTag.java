@@ -16,7 +16,7 @@ public class MixinFloatTag {
 
     @Inject(method = "valueOf", at = @At("HEAD"), cancellable = true)
     private static void replace(float data, CallbackInfoReturnable<FloatTag> cir) {
-        if (DSConfig.ENABLE_NUMBER_TAG_CACHE) {
+        if (DSConfig.CACHE_NUMBER_TAG) {
             cir.setReturnValue(!CachedTags.isFloatInteger(data) || data < CachedTags.START || data >= CachedTags.END
                 ? new FloatTag(data)
                 : CachedTags.getCachedFloat(data));
