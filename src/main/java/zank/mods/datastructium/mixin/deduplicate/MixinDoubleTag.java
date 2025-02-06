@@ -17,7 +17,9 @@ public class MixinDoubleTag {
     @Inject(method = "valueOf", at = @At("HEAD"), cancellable = true)
     private static void replace(double data, CallbackInfoReturnable<DoubleTag> cir) {
         if (DSConfig.ENABLE_NUMBER_TAG_CACHE) {
-            cir.setReturnValue(CachedTags.ofDouble(data));
+            cir.setReturnValue(!CachedTags.isDoubleInteger(data) || data < CachedTags.START || data >= CachedTags.END
+                ? new DoubleTag(data)
+                : CachedTags.getCachedDouble(data));
         }
     }
 }

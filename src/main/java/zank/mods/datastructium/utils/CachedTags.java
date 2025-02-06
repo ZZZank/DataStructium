@@ -33,22 +33,16 @@ public class CachedTags {
         val end = System.currentTimeMillis();
     }
 
-    public static IntTag ofInt(final int i) {
-        return i < START || i >= END
-            ? new IntTag(i)
-            : TAG_INTS[i - START];
+    public static IntTag getCachedInt(int i) {
+        return TAG_INTS[i - START];
     }
 
-    public static FloatTag ofFloat(final float f) {
-        return !isFloatInteger(f) || f < START || f >= END
-            ? new FloatTag(f)
-            : TAG_FLOATS[(int) f - START];
+    public static FloatTag getCachedFloat(final float f) {
+        return TAG_FLOATS[(int) f - START];
     }
 
-    public static DoubleTag ofDouble(final double d) {
-        return !isDoubleInteger(d) || d < START || d >= END
-            ? new DoubleTag(d)
-            : TAG_DOUBLES[(int) d - START];
+    public static DoubleTag getCachedDouble(final double f) {
+        return TAG_DOUBLES[(int) f - START];
     }
 
     public static boolean isFloatInteger(float value) {
