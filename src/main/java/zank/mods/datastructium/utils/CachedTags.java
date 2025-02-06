@@ -23,7 +23,7 @@ public class CachedTags {
     /**
      * <a href="https://0.30000000000000004.com/">0.30000000000000004.com</a>
      */
-    private static final double EPSILON_DOUBLE = 0.0000000000000004;
+    private static final double EPSILON_DOUBLE = 0.0000000000004;
 
     static {
         val start = System.currentTimeMillis();
