@@ -21,6 +21,8 @@ public final class DSConfig {
     public final boolean CACHE_SHADER_UNIFORMS;
     public final boolean TIERED_COMPOUND_TAG_INTERNAL;
     public final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
+    public final int NUMBER_TAG_CACHE_START;
+    public final int NUMBER_TAG_CACHE_END;
 
     static {
         val snapshot = readFromFile();
@@ -28,6 +30,8 @@ public final class DSConfig {
         CACHE_SHADER_UNIFORMS = snapshot.CACHE_SHADER_UNIFORMS;
         COMPOUND_TAG_RECONSTRUCT_THRESHOLD = snapshot.COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
         TIERED_COMPOUND_TAG_INTERNAL = snapshot.TIERED_COMPOUND_TAG_INTERNAL;
+        NUMBER_TAG_CACHE_START = snapshot.NUMBER_TAG_CACHE_START;
+        NUMBER_TAG_CACHE_END = snapshot.NUMBER_TAG_CACHE_END;
     }
 
     @AllArgsConstructor
@@ -41,6 +45,10 @@ public final class DSConfig {
         public boolean TIERED_COMPOUND_TAG_INTERNAL = true;
         @SerializedName("Compound Tag Internal Reconstruct Threshold")
         public int COMPOUND_TAG_RECONSTRUCT_THRESHOLD = 5;
+        @SerializedName("Number Tag Cache starts at (inclusive)")
+        public int NUMBER_TAG_CACHE_START = -4096;
+        @SerializedName("Number Tag Cache ends at (exclusive)")
+        public int NUMBER_TAG_CACHE_END = 4096;
     }
 
     @NotNull
@@ -62,7 +70,9 @@ public final class DSConfig {
             CANONICALIZE_QUADS,
             CACHE_SHADER_UNIFORMS,
             TIERED_COMPOUND_TAG_INTERNAL,
-            COMPOUND_TAG_RECONSTRUCT_THRESHOLD
+            COMPOUND_TAG_RECONSTRUCT_THRESHOLD,
+            NUMBER_TAG_CACHE_START,
+            NUMBER_TAG_CACHE_END
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
