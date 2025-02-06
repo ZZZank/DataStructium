@@ -21,6 +21,7 @@ public final class DSConfig {
     public final boolean CACHE_SHADER_UNIFORMS;
     public final boolean TIERED_COMPOUND_TAG_INTERNAL;
     public final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
+    public final boolean ENABLE_NUMBER_TAG_CACHE;
     public final int NUMBER_TAG_CACHE_START;
     public final int NUMBER_TAG_CACHE_END;
 
@@ -32,6 +33,7 @@ public final class DSConfig {
         TIERED_COMPOUND_TAG_INTERNAL = snapshot.TIERED_COMPOUND_TAG_INTERNAL;
         NUMBER_TAG_CACHE_START = snapshot.NUMBER_TAG_CACHE_START;
         NUMBER_TAG_CACHE_END = snapshot.NUMBER_TAG_CACHE_END;
+        ENABLE_NUMBER_TAG_CACHE = snapshot.ENABLE_NUMBER_TAG_CACHE;
     }
 
     @AllArgsConstructor
@@ -45,6 +47,8 @@ public final class DSConfig {
         public boolean TIERED_COMPOUND_TAG_INTERNAL = true;
         @SerializedName("Compound Tag Internal Reconstruct Threshold")
         public int COMPOUND_TAG_RECONSTRUCT_THRESHOLD = 5;
+        @SerializedName("Enable Number Tag Cache")
+        public boolean ENABLE_NUMBER_TAG_CACHE = true;
         @SerializedName("Number Tag Cache starts at (inclusive)")
         public int NUMBER_TAG_CACHE_START = -4096;
         @SerializedName("Number Tag Cache ends at (exclusive)")
@@ -71,6 +75,7 @@ public final class DSConfig {
             CACHE_SHADER_UNIFORMS,
             TIERED_COMPOUND_TAG_INTERNAL,
             COMPOUND_TAG_RECONSTRUCT_THRESHOLD,
+            ENABLE_NUMBER_TAG_CACHE,
             NUMBER_TAG_CACHE_START,
             NUMBER_TAG_CACHE_END
         );
