@@ -3,6 +3,8 @@ package zank.mods.datastructium.mixin.mods.industrialforegoing;
 import com.buuz135.industrial.block.resourceproduction.tile.MaterialStoneWorkFactoryTile;
 import com.buuz135.industrial.plugin.jei.JEICustomPlugin;
 import com.buuz135.industrial.plugin.jei.category.StoneWorkCategory;
+import lombok.val;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -31,6 +33,10 @@ public abstract class MixinJEICustomPlugin {
         ItemStack input,
         List<MaterialStoneWorkFactoryTile.StoneWorkAction> usedModes
     ) {
-        return new StoneWorkRecipeGatherer().findAllStoneWorkOutputs(input, usedModes);
+        assert Minecraft.getInstance().level != null;
+        StoneWorkRecipeGatherer.init(Minecraft.getInstance().level);
+        val collected = StoneWorkRecipeGatherer.collectStoneWorks(input, usedModes);
+        StoneWorkRecipeGatherer.clear();
+        return collected;
     }
 }
