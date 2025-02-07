@@ -11,10 +11,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -69,6 +66,14 @@ public class StoneWorkRecipeGatherer {
             .collect(Collectors.toList());
         BIG_CRAFT = craftingRecipes
             .stream()
+            .filter(r -> {
+                val type = r.getClass();
+                // match class (instead of using instanceof) to skip their subclasses
+                if (type == ShapedRecipe.class || type == ShapelessRecipe.class) {
+                    return r.getIngredients().size() == 3 * 3;
+                }
+                return true;
+            })
             .filter(r -> r.canCraftInDimensions(3, 3))
             .collect(Collectors.toList());
     }
