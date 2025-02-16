@@ -1,16 +1,11 @@
 package zank.mods.datastructium.mixin.mods.jer;
 
-import com.google.common.base.Suppliers;
 import jeresources.entry.MobEntry;
 import jeresources.jei.mob.MobWrapper;
 import lombok.val;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import org.spongepowered.asm.mixin.*;
-
-import java.util.function.Supplier;
 
 /**
  * @author ZZZank
@@ -33,5 +28,14 @@ public class MixinMobWrapper {
             return ItemStack.EMPTY;
         }
         return item.getDefaultInstance();
+    }
+
+    /**
+     * @author ZZZank
+     * @reason the {@link #getSpawnEgg()} method will never return null, even in original logic
+     */
+    @Overwrite
+    public boolean hasSpawnEgg() {
+        return !this.getSpawnEgg().isEmpty();
     }
 }
