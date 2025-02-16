@@ -22,20 +22,15 @@ public class MixinMobWrapper {
     @Final
     private MobEntry mob;
 
-    @Unique
-    private static final Supplier<ItemStack> dataStruct$fallbackItem = Suppliers.memoize(() ->
-        Items.BARRIER.getDefaultInstance().copy().setHoverName(new TextComponent("No Egg"))
-    );
-
     /**
      * @author ZZZank
-     * @reason use forge's map based egg lookup, add fallback if no spawn egg found
+     * @reason use forge's map based egg lookup, return empty stack if no spawn egg found
      */
     @Overwrite
     public ItemStack getSpawnEgg() {
         val item = ForgeSpawnEggItem.fromEntityType(this.mob.getEntity().getType());
         if (item == null) {
-            return dataStruct$fallbackItem.get();
+            return ItemStack.EMPTY;
         }
         return item.getDefaultInstance();
     }
