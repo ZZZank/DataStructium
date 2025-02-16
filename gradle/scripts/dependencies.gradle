@@ -38,6 +38,8 @@ dependencies {
 
     modCompileOnly("curse.maven:masterful-machinery-423476:4082604")
 
+    modCompileOnly("curse.maven:just-enough-resources-jer-240630:4526612")
+
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
     // will cause loom to remap the file to your specified mappings
