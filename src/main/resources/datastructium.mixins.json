@@ -15,7 +15,6 @@
   ],
   "server": [],
   "client": [
-    "data_struct.MixinModelBakery",
     "data_struct.MixinMultiPartBakedModel",
     "data_struct.MixinSimpleBakedModel",
     "deduplicate.GLStateManagerMixin",
