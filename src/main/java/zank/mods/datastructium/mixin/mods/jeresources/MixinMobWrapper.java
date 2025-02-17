@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.mods.jer;
+package zank.mods.datastructium.mixin.mods.jeresources;
 
 import jeresources.entry.MobEntry;
 import jeresources.jei.mob.MobWrapper;
