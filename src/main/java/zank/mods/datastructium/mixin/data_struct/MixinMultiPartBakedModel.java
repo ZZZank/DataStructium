@@ -1,6 +1,5 @@
 package zank.mods.datastructium.mixin.data_struct;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.minecraft.client.resources.model.BakedModel;
@@ -13,6 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.utils.CollectUtils;
 
 import java.util.BitSet;
 import java.util.List;
@@ -38,6 +38,6 @@ public abstract class MixinMultiPartBakedModel {
     @Inject(method = "<init>", at = @At("RETURN"))
     public void replaceInternal(List<Pair<Predicate<BlockState>, BakedModel>> list, CallbackInfo ci) {
         this.selectorCache = new Reference2ObjectOpenHashMap<>(this.selectorCache);
-        this.selectors = ImmutableList.copyOf(this.selectors);
+        this.selectors = CollectUtils.reduceSmallList(this.selectors);
     }
 }

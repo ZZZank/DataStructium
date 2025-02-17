@@ -1,6 +1,5 @@
 package zank.mods.datastructium.mixin.data_struct;
 
-import com.google.common.collect.ImmutableList;
 import lombok.val;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -15,6 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.utils.CollectUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -45,9 +45,9 @@ public abstract class MixinSimpleBakedModel {
         ItemOverrides arg3,
         CallbackInfo ci
     ) {
-        this.unculledFaces = ImmutableList.copyOf(this.unculledFaces);
+        this.unculledFaces = CollectUtils.reduceSmallList(this.unculledFaces);
         for (val entry : this.culledFaces.entrySet()) {
-            entry.setValue(ImmutableList.copyOf(entry.getValue()));
+            entry.setValue(CollectUtils.reduceSmallList(entry.getValue()));
         }
     }
 }
