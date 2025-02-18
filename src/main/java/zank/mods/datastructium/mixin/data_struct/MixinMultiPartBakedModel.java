@@ -18,8 +18,8 @@ import java.util.function.Predicate;
 @Mixin(value = MultiPartBakedModel.class, priority = 345)
 public abstract class MixinMultiPartBakedModel {
 
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
-    private List<Pair<Predicate<BlockState>, BakedModel>> shrinkList(List<Pair<Predicate<BlockState>, BakedModel>> list) {
+    @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    private static List<Pair<Predicate<BlockState>, BakedModel>> shrinkList(List<Pair<Predicate<BlockState>, BakedModel>> list) {
         return CollectUtils.reduceSmallList(list);
     }
 }
