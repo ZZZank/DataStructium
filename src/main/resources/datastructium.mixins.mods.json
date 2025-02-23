@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "jeresources.MixinMobWrapper",
+    "kubejs.MixinKubeJSResourcePack",
     "masterfulmachinery.MixinMachineStructureRecipe",
     "masterfulmachinery.MixinMachineStructureRecipeData"
   ],

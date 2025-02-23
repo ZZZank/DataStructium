@@ -24,6 +24,20 @@ repositories {
         }
     }
     maven {
+        // Shedaniel's maven (Architectury API)
+        url = "https://maven.architectury.dev"
+        content {
+            includeGroup "me.shedaniel"
+        }
+    }
+    maven {
+        // saps.dev Maven (KubeJS and Rhino)
+        url = "https://maven.saps.dev/minecraft"
+        content {
+            includeGroup "dev.latvian.mods"
+        }
+    }
+    maven {
         name 'ModMaven'
         url "https://modmaven.dev"
     }
@@ -39,6 +53,8 @@ dependencies {
     modCompileOnly("curse.maven:masterful-machinery-423476:4082604")
 
     modCompileOnly("curse.maven:just-enough-resources-jer-240630:4526612")
+
+    modCompileOnly("dev.latvian.mods:kubejs-forge:1605.3.19-build.299")
 
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
