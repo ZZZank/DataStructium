@@ -32,7 +32,6 @@ public abstract class MixinMachineStructureRecipe {
      */
     @Overwrite
     public boolean innerBlockMatch(BlockPos controllerPos, Level world, MachineStructureRecipeKeyModel model) {
-
         for (val data : model.getData()) {
             val pos = controllerPos.offset(model.getPos().getX(), model.getPos().getY(), model.getPos().getZ());
             val blockState = world.getBlockState(pos);

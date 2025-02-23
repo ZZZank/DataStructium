@@ -1,7 +1,6 @@
 package zank.mods.datastructium.mixin.mods.kubejs;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 import dev.latvian.kubejs.KubeJSPaths;
 import dev.latvian.kubejs.script.data.KubeJSResourcePack;
 import dev.latvian.kubejs.util.UtilsJS;
@@ -82,7 +81,7 @@ public class MixinKubeJSResourcePack {
                 dataStruct$cachedPaths = Collections.emptyList();
             }
         }
-        val inputPath = root.resolve(path);
+        val inputPath = root.getFileSystem().getPath(path);
         dataStruct$cachedPaths
             .stream()
             .filter(p -> p.getNameCount() > 1 && p.getNameCount() - 1 <= maxDepth)
@@ -93,30 +92,5 @@ public class MixinKubeJSResourcePack {
                 PATH_JOINER.join(p.subpath(1, Math.min(maxDepth, p.getNameCount())))
             ))
             .forEach(list::add);
-    }
-
-    private void f(PackType type, String namespace, String path, int maxDepth, Predicate<String> filter) {
-        List<ResourceLocation> list = Lists.newArrayList();
-
-        UtilsJS.tryIO(() -> {
-            Path root = KubeJSPaths.get(type).toAbsolutePath();
-            if (Files.exists(root) && Files.isDirectory(root)) {
-                Path inputPath = root.resolve(path);
-
-                Files.walk(root)
-                    .map(Path::toAbsolutePath)
-                    .map(root::relativize)
-                    .filter(p -> !p.toString().endsWith(".mcmeta"))
-
-                    .filter(p -> p.getNameCount() > 1 && p.getNameCount() - 1 <= maxDepth)
-                    .filter(p -> p.subpath(1, p.getNameCount()).startsWith(inputPath))
-                    .filter(p -> filter.test(p.getFileName().toString()))
-                    .map(p -> new ResourceLocation(
-                        p.getName(0).toString(),
-                        Joiner.on('/').join(p.subpath(1, Math.min(maxDepth, p.getNameCount())))
-                    ))
-                    .forEach(list::add);
-            }
-        });
     }
 }
