@@ -33,7 +33,7 @@ public class MixinKubeJSResourcePack {
     @Unique
     private static final Joiner PATH_JOINER = Joiner.on('/');
     @Unique
-    private final EnumMap<PackType, List<Path>> dataStruct$cachedPaths = new EnumMap<>(PackType.class);
+    private List<Path> dataStruct$cachedPaths = null;
 
     @Redirect(
         method = "getResources",
@@ -66,25 +66,24 @@ public class MixinKubeJSResourcePack {
         List<ResourceLocation> list
     ) {
         val root = KubeJSPaths.get(type).toAbsolutePath();
-        if (!dataStruct$cachedPaths.containsKey(type)) {
+        if (dataStruct$cachedPaths == null) {
             if (Files.exists(root) && Files.isDirectory(root)) {
                 try {
-                    val cached = Files.walk(root)
+                    dataStruct$cachedPaths = Files.walk(root)
                         .map(Path::toAbsolutePath)
                         .map(root::relativize)
                         .filter(p -> !p.toString().endsWith(".mcmeta"))
                         .collect(Collectors.toList());
-                    dataStruct$cachedPaths.put(type, cached);
                 } catch (IOException ex) {
                     DataStructium.LOGGER.error("Error when initializing KubeJS resource cache", ex);
-                    dataStruct$cachedPaths.put(type, Collections.emptyList());
+                    dataStruct$cachedPaths = Collections.emptyList();
                 }
             } else {
-                dataStruct$cachedPaths.put(type, Collections.emptyList());
+                dataStruct$cachedPaths = Collections.emptyList();
             }
         }
         val inputPath = root.resolve(path);
-        dataStruct$cachedPaths.get(type)
+        dataStruct$cachedPaths
             .stream()
             .filter(p -> p.getNameCount() > 1 && p.getNameCount() - 1 <= maxDepth)
             .filter(p -> p.subpath(1, p.getNameCount()).startsWith(inputPath))
