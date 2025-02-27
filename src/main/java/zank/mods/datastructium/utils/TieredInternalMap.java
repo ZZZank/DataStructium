@@ -3,6 +3,7 @@ package zank.mods.datastructium.utils;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import zank.mods.datastructium.DSConfig;
 
@@ -25,7 +26,16 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
         } else if (map instanceof Object2ObjectMap) {
             internal = map;
         } else if (map.size() < DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD) {
-            internal = new Object2ObjectArrayMap<>(map);
+            // initialize key-value pairs by ourselves to avoid checking keys on initialization
+            val keys = new Object[map.size()];
+            val values = new Object[map.size()];
+            int i = 0;
+            for (val entry : map.entrySet()) {
+                keys[i] = entry.getKey();
+                values[i] = entry.getValue();
+                i++;
+            }
+            internal = new Object2ObjectArrayMap<>(keys, values);
         } else {
             internal = new Object2ObjectOpenHashMap<>(map);
         }
@@ -96,7 +106,11 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-        m.forEach(this::put);
+        if (internal instanceof Object2ObjectOpenHashMap) {
+            internal.putAll(m);
+        } else {
+            m.forEach(this::put);
+        }
     }
 
     @Override
