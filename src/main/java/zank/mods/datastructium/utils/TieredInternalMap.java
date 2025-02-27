@@ -10,11 +10,25 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public final class TieredInternalMap<K, V> implements Map<K, V> {
 
+    public TieredInternalMap() {
+        internal = new Object2ObjectArrayMap<>();
+    }
+
+    public TieredInternalMap(Map<K, V> map) {
+        if (map.size() < DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD) {
+            internal = new Object2ObjectArrayMap<>(map);
+        } else {
+            internal = new Object2ObjectOpenHashMap<>(map);
+        }
+    }
+
     @NotNull
-    private Map<K, V> internal = new Object2ObjectArrayMap<>();
+    private Map<K, V> internal;
 
     @Override
     public int size() {
@@ -41,12 +55,34 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
         return internal.get(key);
     }
 
-    @Override
-    public V put(K key, V value) {
+    private void checkSize() {
         if (this.size() == DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD && internal instanceof Object2ObjectArrayMap) {
             internal = new Object2ObjectOpenHashMap<>(internal);
         }
+    }
+
+    @Override
+    public V put(K key, V value) {
+        checkSize();
         return internal.put(key, value);
+    }
+
+    @Override
+    public V compute(K key, @NotNull BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+        checkSize();
+        return internal.compute(key, remappingFunction);
+    }
+
+    @Override
+    public V computeIfAbsent(K key, @NotNull Function<? super K, ? extends V> mappingFunction) {
+        checkSize();
+        return internal.computeIfAbsent(key, mappingFunction);
+    }
+
+    @Override
+    public V computeIfPresent(K key, @NotNull BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+        checkSize();
+        return internal.computeIfPresent(key, remappingFunction);
     }
 
     @Override
@@ -87,14 +123,7 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Map)) {
-            return false;
-        }
-        val m = (Map) o;
-        return m.size() == this.size() && this.entrySet().containsAll(m.entrySet());
+        return internal.equals(o);
     }
 
     @Override
