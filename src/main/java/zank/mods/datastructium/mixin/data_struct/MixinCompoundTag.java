@@ -29,62 +29,15 @@ public abstract class MixinCompoundTag {
         return map;
     }
 
-    @Shadow
-    private static byte readNamedTagType(DataInput input, NbtAccounter accounter) throws IOException {
-        throw new IllegalStateException("calling mixin shadow method");
-    }
-
-    @Shadow
-    private static String readNamedTagName(DataInput input, NbtAccounter accounter) throws IOException {
-        throw new IllegalStateException("calling mixin shadow method");
-    }
-
-    @Shadow
-    private static Tag readNamedTagData(
-        TagType<?> type,
-        String name,
-        DataInput input,
-        int depth,
-        NbtAccounter accounter
-    ) {
-        throw new IllegalStateException("calling mixin shadow method");
-    }
-
     @Mixin(targets = "net.minecraft.nbt.CompoundTag$1")
     public static abstract class MixinTagType {
 
-        @Inject(
-            method = "load(Ljava/io/DataInput;ILnet/minecraft/nbt/NbtAccounter;)Lnet/minecraft/nbt/CompoundTag;",
-            at = @At(
-                value = "INVOKE",
-                target = "Lcom/google/common/collect/Maps;newHashMap()Ljava/util/HashMap;"
-            ),
-            cancellable = true
-        )
-        private void replaceAllbody(
-            DataInput input,
-            int depth,
-            NbtAccounter accounter,
-            CallbackInfoReturnable<CompoundTag> cir
-        ) throws IOException {
-            if (!DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
-                return;
+        @ModifyVariable(method = "load*", at = @At("STORE"))
+        private Map<String, Tag> replaceMap(Map<String, Tag> map) {
+            if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
+                return new TieredInternalMap<>();
             }
-            val map = new TieredInternalMap<String, Tag>();
-
-            byte type;
-            while ((type = readNamedTagType(input, accounter)) != 0) {
-                val name = readNamedTagName(input, accounter);
-                accounter.accountBits(224 + name.length() * 16L);
-                accounter.accountBits(32L);
-
-                val data = readNamedTagData(TagTypes.getType(type), name, input, depth + 1, accounter);
-                if (map.put(name, data) != null) {
-                    accounter.accountBits(288L);
-                }
-            }
-
-            cir.setReturnValue(new CompoundTag(map));
+            return map;
         }
     }
 }
