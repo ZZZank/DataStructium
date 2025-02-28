@@ -9,6 +9,7 @@
     "MixinScanner",
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
+    "data_struct.MixinCompoundTag$MixinTagType",
     "deduplicate.MixinDoubleTag",
     "deduplicate.MixinFloatTag",
     "deduplicate.MixinIntTag"
