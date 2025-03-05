@@ -23,6 +23,7 @@ public final class DSConfig {
     public final boolean CACHE_NUMBER_TAG;
     public final int NUMBER_TAG_CACHE_START;
     public final int NUMBER_TAG_CACHE_END;
+    public final boolean DISABLE_RECIPE_AWARDING;
 
     static {
         val snapshot = readFromFile();
@@ -33,6 +34,7 @@ public final class DSConfig {
         NUMBER_TAG_CACHE_START = snapshot.NUMBER_TAG_CACHE_START;
         NUMBER_TAG_CACHE_END = snapshot.NUMBER_TAG_CACHE_END;
         CACHE_NUMBER_TAG = snapshot.CACHE_NUMBER_TAG;
+        DISABLE_RECIPE_AWARDING = snapshot.DISABLE_RECIPE_AWARDING;
     }
 
     @AllArgsConstructor
@@ -52,6 +54,8 @@ public final class DSConfig {
         public int NUMBER_TAG_CACHE_START = -4096;
         @SerializedName("Number Tag Cache ends at (exclusive)")
         public int NUMBER_TAG_CACHE_END = 4096;
+        @SerializedName("Prevent the server from 'awarding' recipe data to player recipe book")
+        public boolean DISABLE_RECIPE_AWARDING = false;
     }
 
     @NotNull
@@ -76,7 +80,8 @@ public final class DSConfig {
             COMPOUND_TAG_RECONSTRUCT_THRESHOLD,
             CACHE_NUMBER_TAG,
             NUMBER_TAG_CACHE_START,
-            NUMBER_TAG_CACHE_END
+            NUMBER_TAG_CACHE_END,
+            DISABLE_RECIPE_AWARDING
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
