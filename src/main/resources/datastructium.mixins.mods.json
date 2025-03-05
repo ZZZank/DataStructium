@@ -5,6 +5,7 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "farmersdelight.MixinToolIngredient",
     "jeresources.MixinMobWrapper",
     "kubejs.MixinKubeJSResourcePack",
     "masterfulmachinery.MixinMachineStructureRecipe",

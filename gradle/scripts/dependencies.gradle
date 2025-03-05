@@ -56,6 +56,8 @@ dependencies {
 
     modCompileOnly("dev.latvian.mods:kubejs-forge:1605.3.19-build.299")
 
+    modCompileOnly("curse.maven:farmers-delight-398521:3765350")
+
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
     // will cause loom to remap the file to your specified mappings
