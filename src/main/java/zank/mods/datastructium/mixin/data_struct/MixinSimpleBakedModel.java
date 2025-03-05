@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.utils.CollectUtils;
 
 import java.util.List;
@@ -45,9 +46,11 @@ public abstract class MixinSimpleBakedModel {
         ItemOverrides arg3,
         CallbackInfo ci
     ) {
-        this.unculledFaces = CollectUtils.reduceSmallList(this.unculledFaces);
-        for (val entry : this.culledFaces.entrySet()) {
-            entry.setValue(CollectUtils.reduceSmallList(entry.getValue()));
+        if (DSConfig.OPTIMIZE_SIMPLE_MODEL) {
+            this.unculledFaces = CollectUtils.reduceSmallList(this.unculledFaces);
+            for (val entry : this.culledFaces.entrySet()) {
+                entry.setValue(CollectUtils.reduceSmallList(entry.getValue()));
+            }
         }
     }
 }

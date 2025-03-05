@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.utils.CollectUtils;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public abstract class MixinMultiPartBakedModel {
 
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private static List<Pair<Predicate<BlockState>, BakedModel>> shrinkList(List<Pair<Predicate<BlockState>, BakedModel>> list) {
-        return CollectUtils.reduceSmallList(list);
+        return DSConfig.OPTIMIZE_SIMPLE_MODEL
+            ? CollectUtils.reduceSmallList(list)
+            : list;
     }
 }
