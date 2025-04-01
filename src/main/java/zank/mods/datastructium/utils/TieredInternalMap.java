@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public final class TieredInternalMap<K, V> implements Map<K, V> {
+public class TieredInternalMap<K, V> implements Map<K, V> {
 
     public TieredInternalMap() {
         internal = new Object2ObjectArrayMap<>();
@@ -106,11 +106,7 @@ public final class TieredInternalMap<K, V> implements Map<K, V> {
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-        if (internal instanceof Object2ObjectOpenHashMap) {
-            internal.putAll(m);
-        } else {
-            m.forEach(this::put);
-        }
+        m.forEach(this::put);
     }
 
     @Override
