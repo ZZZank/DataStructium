@@ -20,8 +20,8 @@ public final class ShaderCacheLoader {
         SHADER_CACHE.clear();
     }
 
-    public static int uniform(int i, CharSequence charSequence) {
-        return SHADER_CACHE.computeIfAbsent(i, v -> new ShaderProgramCache(i))
-            .uniform(charSequence);
+    public static int uniform(int program, CharSequence name) {
+        return SHADER_CACHE.computeIfAbsent(program, ShaderProgramCache::new)
+            .uniform(name);
     }
 }

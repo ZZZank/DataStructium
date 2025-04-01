@@ -12,9 +12,9 @@ import zank.mods.datastructium.pools.ShaderCacheLoader;
 public abstract class GLStateManagerMixin {
 
     @Inject(method = "_glGetUniformLocation", at = @At("RETURN"), cancellable = true)
-    private static void getUniform(int u, CharSequence sequence, CallbackInfoReturnable<Integer> cir) {
+    private static void getUniform(int program, CharSequence name, CallbackInfoReturnable<Integer> cir) {
         if (DSConfig.CACHE_SHADER_UNIFORMS) {
-            cir.setReturnValue(ShaderCacheLoader.uniform(u, sequence));
+            cir.setReturnValue(ShaderCacheLoader.uniform(program, name));
         }
     }
 }
