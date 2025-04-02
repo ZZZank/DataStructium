@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin;
+package zank.mods.datastructium.mixin.misc;
 
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;

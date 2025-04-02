@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin;
+package zank.mods.datastructium.mixin.misc;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

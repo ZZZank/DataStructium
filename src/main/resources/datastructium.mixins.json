@@ -5,9 +5,9 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinEnumProperty",
-    "MixinScanner",
-    "MixinServerPlayer",
+    "misc.MixinEnumProperty",
+    "misc.MixinScanner",
+    "misc.MixinServerPlayer",
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
     "data_struct.MixinCompoundTag$MixinTagType",
@@ -17,7 +17,7 @@
   ],
   "server": [],
   "client": [
-    "RebuildTaskMixin",
+    "misc.RebuildTaskMixin",
     "data_struct.MixinMultiPartBakedModel",
     "data_struct.MixinSimpleBakedModel",
     "deduplicate.GLStateManagerMixin",

@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin;
+package zank.mods.datastructium.mixin.misc;
 
 import net.minecraftforge.fml.loading.moddiscovery.Scanner;
 import org.objectweb.asm.ClassReader;
