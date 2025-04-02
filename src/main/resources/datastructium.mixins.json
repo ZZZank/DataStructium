@@ -17,6 +17,7 @@
   ],
   "server": [],
   "client": [
+    "RebuildTaskMixin",
     "data_struct.MixinMultiPartBakedModel",
     "data_struct.MixinSimpleBakedModel",
     "deduplicate.GLStateManagerMixin",
