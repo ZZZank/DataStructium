@@ -37,7 +37,7 @@ public class SectionBlockPosIterator implements Iterator<BlockPos> {
     @Override
     public BlockPos next() {
         val i = index;
-        if (i >= 4096) {
+        if (i >= SECTION_SIZE * SECTION_SIZE * SECTION_SIZE) {
             throw new NoSuchElementException();
         }
         index = i + 1;

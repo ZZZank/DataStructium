@@ -3,7 +3,6 @@ package zank.mods.datastructium;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.experimental.UtilityClass;
 import lombok.val;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
@@ -14,17 +13,16 @@ import java.nio.file.Files;
 /**
  * @author ZZZank
  */
-@UtilityClass
 public final class DSConfig {
-    public final boolean CANONICALIZE_QUADS;
-    public final boolean CACHE_SHADER_UNIFORMS;
-    public final boolean TIERED_COMPOUND_TAG_INTERNAL;
-    public final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
-    public final boolean CACHE_NUMBER_TAG;
-    public final int NUMBER_TAG_CACHE_START;
-    public final int NUMBER_TAG_CACHE_END;
-    public final boolean DISABLE_RECIPE_AWARDING;
-    public final boolean OPTIMIZE_SIMPLE_MODEL;
+    public static final boolean CANONICALIZE_QUADS;
+    public static final boolean CACHE_SHADER_UNIFORMS;
+    public static final boolean TIERED_COMPOUND_TAG_INTERNAL;
+    public static final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
+    public static final boolean CACHE_NUMBER_TAG;
+    public static final int NUMBER_TAG_CACHE_START;
+    public static final int NUMBER_TAG_CACHE_END;
+    public static final boolean DISABLE_RECIPE_AWARDING;
+    public static final boolean OPTIMIZE_SIMPLE_MODEL;
 
     static {
         val snapshot = readFromFile();
@@ -37,6 +35,10 @@ public final class DSConfig {
         CACHE_NUMBER_TAG = snapshot.CACHE_NUMBER_TAG;
         DISABLE_RECIPE_AWARDING = snapshot.DISABLE_RECIPE_AWARDING;
         OPTIMIZE_SIMPLE_MODEL = snapshot.OPTIMIZE_SIMPLE_MODEL;
+    }
+
+    private DSConfig() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     @AllArgsConstructor

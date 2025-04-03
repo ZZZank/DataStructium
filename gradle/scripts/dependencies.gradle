@@ -15,8 +15,8 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
-                name 'Modrinth'
-                url 'https://api.modrinth.com/maven'
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
             }
         }
         filter {
@@ -38,8 +38,8 @@ repositories {
         }
     }
     maven {
-        name 'ModMaven'
-        url "https://modmaven.dev"
+        name = 'ModMaven'
+        url = "https://modmaven.dev"
     }
     mavenLocal() // Must be last for caching to work
 }
