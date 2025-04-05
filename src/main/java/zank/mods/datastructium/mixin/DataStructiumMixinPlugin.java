@@ -35,7 +35,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         constantOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
         constantOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
         constantOverride("compound_tag_internal", DSConfig.TIERED_COMPOUND_TAG_INTERNAL);
-        constantOverride("block_pos_hashing", DSConfig.REPLACE_BLOCK_POS_HASHING);
+        constantOverride("vec3i_hashing", DSConfig.REPLACE_VEC3I_HASHING);
     }
 
     private static boolean modPresent(String modId) {

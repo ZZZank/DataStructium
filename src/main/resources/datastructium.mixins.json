@@ -6,7 +6,7 @@
   "plugin": "zank.mods.datastructium.mixin.DataStructiumMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "block_pos_hashing.MixinBlockPos",
+    "vec3i_hashing.MixinVec3i",
     "cache_number_tag.MixinDoubleTag",
     "cache_number_tag.MixinFloatTag",
     "cache_number_tag.MixinIntTag",

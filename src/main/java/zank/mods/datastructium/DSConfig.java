@@ -25,7 +25,7 @@ public final class DSConfig {
     public static final int NUMBER_TAG_CACHE_END;
     public static final boolean DISABLE_RECIPE_AWARDING;
     public static final boolean OPTIMIZE_SIMPLE_MODEL;
-    public static final boolean REPLACE_BLOCK_POS_HASHING;
+    public static final boolean REPLACE_VEC3I_HASHING;
 
     static {
         val snapshot = readFromFile();
@@ -40,7 +40,7 @@ public final class DSConfig {
         CACHE_NUMBER_TAG = snapshot.CACHE_NUMBER_TAG;
         DISABLE_RECIPE_AWARDING = snapshot.DISABLE_RECIPE_AWARDING;
         OPTIMIZE_SIMPLE_MODEL = snapshot.OPTIMIZE_SIMPLE_MODEL;
-        REPLACE_BLOCK_POS_HASHING = snapshot.REPLACE_BLOCK_POS_HASHING;
+        REPLACE_VEC3I_HASHING = snapshot.REPLACE_VEC3I_HASHING;
     }
 
     private DSConfig() {
@@ -72,8 +72,8 @@ public final class DSConfig {
         public boolean DISABLE_RECIPE_AWARDING = false;
         @SerializedName("Optimize simple model")
         public boolean OPTIMIZE_SIMPLE_MODEL = true;
-        @SerializedName("Replace hashing algorithm of BlockPos with one with less collision")
-        public boolean REPLACE_BLOCK_POS_HASHING = true;
+        @SerializedName("Replace hashing algorithm of Vec3i to reduce hash collision")
+        public boolean REPLACE_VEC3I_HASHING = true;
     }
 
     @NotNull
@@ -103,7 +103,7 @@ public final class DSConfig {
             NUMBER_TAG_CACHE_END,
             DISABLE_RECIPE_AWARDING,
             OPTIMIZE_SIMPLE_MODEL,
-            REPLACE_BLOCK_POS_HASHING
+            REPLACE_VEC3I_HASHING
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
