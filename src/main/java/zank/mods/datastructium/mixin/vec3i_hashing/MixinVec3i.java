@@ -3,6 +3,7 @@ package zank.mods.datastructium.mixin.vec3i_hashing;
 import it.unimi.dsi.fastutil.HashCommon;
 import net.minecraft.core.Vec3i;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 /**
@@ -24,7 +25,12 @@ public abstract class MixinVec3i {
     @Shadow
     private int z;
 
+    /**
+     * @author ZZZank
+     * @reason an algorithm with less hash collision in general
+     */
     @Override
+    @Overwrite
     public int hashCode() {
         return HashCommon.mix(HashCommon.mix(this.x) + this.y) + this.z;
     }
