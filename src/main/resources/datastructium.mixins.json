@@ -5,7 +5,6 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "misc.MixinEnumProperty",
     "misc.MixinScanner",
     "misc.MixinServerPlayer",
     "data_struct.MixinBlockPos",
