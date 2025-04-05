@@ -26,14 +26,18 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
     static {
         OVERRIDE_FACTORIES.add(key -> {
             val parts = key.split("\\.");
-            return parts.length > 1 && "mods".equals(parts[0]) ? modPresent(parts[1]) : null;
+            return parts.length > 1 && "mods".equals(parts[0])
+                ? () -> FMLLoader.getLoadingModList().getModFileById(parts[1]) != null
+                : null;
         });
-        OVERRIDES.put("cache_number_tag", () -> DSConfig.CACHE_NUMBER_TAG);
-        OVERRIDES.put("optimize_small_model", () -> DSConfig.OPTIMIZE_SIMPLE_MODEL);
+        addOverride("cache_number_tag", DSConfig.CACHE_NUMBER_TAG);
+        addOverride("optimize_small_model", DSConfig.OPTIMIZE_SIMPLE_MODEL);
+        addOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
+        addOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
     }
 
-    private static Supplier<Boolean> modPresent(String modId) {
-        return () -> FMLLoader.getLoadingModList().getModFileById(modId) != null;
+    private static void addOverride(String key, Boolean value) {
+        OVERRIDES.put(key, () -> value);
     }
 
     @Override
