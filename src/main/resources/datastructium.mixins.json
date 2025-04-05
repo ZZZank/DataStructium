@@ -18,8 +18,8 @@
   "server": [],
   "client": [
     "misc.RebuildTaskMixin",
-    "data_struct.MixinMultiPartBakedModel",
-    "data_struct.MixinSimpleBakedModel",
+    "optimize_small_model.MixinMultiPartBakedModel",
+    "optimize_small_model.MixinSimpleBakedModel",
     "deduplicate.GLStateManagerMixin",
     "deduplicate.MixinBakedQuads"
   ],

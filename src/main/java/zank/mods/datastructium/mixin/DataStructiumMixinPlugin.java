@@ -29,6 +29,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             return parts.length > 1 && "mods".equals(parts[0]) ? modPresent(parts[1]) : null;
         });
         OVERRIDES.put("cache_number_tag", () -> DSConfig.CACHE_NUMBER_TAG);
+        OVERRIDES.put("optimize_small_model", () -> DSConfig.OPTIMIZE_SIMPLE_MODEL);
     }
 
     private static Supplier<Boolean> modPresent(String modId) {
