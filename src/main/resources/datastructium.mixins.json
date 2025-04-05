@@ -24,7 +24,7 @@
   "client": [
     "cache_shader_uniform.GLStateManagerMixin",
     "canonicalize_quads.MixinBakedQuads",
-    "misc.RebuildTaskMixin",
+    "misc.MixinRebuildTask",
     "mods.industrialforegoing.MixinJEICustomPlugin",
     "optimize_small_model.MixinMultiPartBakedModel",
     "optimize_small_model.MixinSimpleBakedModel"

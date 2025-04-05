@@ -136,10 +136,11 @@ public class StoneWorkRecipeGatherer {
         if (usedModes.size() >= 4) {
             return Collections.emptyList();
         }
+        val level = Minecraft.getInstance().level;
         val recipes = new ArrayList<StoneWorkCategory.Wrapper>();
         for (val mode : ACTIONS) {
             val output =
-                getWork(mode).apply(Minecraft.getInstance().level, ItemHandlerHelper.copyStackWithSize(lastOutput, 9));
+                getWork(mode).apply(level, ItemHandlerHelper.copyStackWithSize(lastOutput, 9));
             if (output.isEmpty()) {
                 continue;
             }

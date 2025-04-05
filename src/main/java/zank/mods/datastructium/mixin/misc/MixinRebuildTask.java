@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import zank.mods.datastructium.utils.SectionBlockPosIterator;
 
 @Mixin(targets = {"net/minecraft/client/renderer/chunk/ChunkRenderDispatcher$RenderChunk$RebuildTask"}, priority = 2000)
-public abstract class RebuildTaskMixin {
+public abstract class MixinRebuildTask {
     /**
      * @author embeddedt
      * @reason Use a much faster iterator implementation than vanilla's Guava-based one.
