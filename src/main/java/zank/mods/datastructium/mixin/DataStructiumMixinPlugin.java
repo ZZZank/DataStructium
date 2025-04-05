@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import zank.mods.datastructium.DSConfig;
 
 import java.util.*;
 import java.util.function.Function;
@@ -27,6 +28,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             val parts = key.split("\\.");
             return parts.length > 1 && "mods".equals(parts[0]) ? modPresent(parts[1]) : null;
         });
+        OVERRIDES.put("cache_number_tag", () -> DSConfig.CACHE_NUMBER_TAG);
     }
 
     private static Supplier<Boolean> modPresent(String modId) {

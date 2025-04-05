@@ -11,9 +11,9 @@
     "data_struct.MixinBlockPos",
     "data_struct.MixinCompoundTag",
     "data_struct.MixinCompoundTag$MixinTagType",
-    "deduplicate.MixinDoubleTag",
-    "deduplicate.MixinFloatTag",
-    "deduplicate.MixinIntTag"
+    "cache_number_tag.MixinDoubleTag",
+    "cache_number_tag.MixinFloatTag",
+    "cache_number_tag.MixinIntTag"
   ],
   "server": [],
   "client": [
