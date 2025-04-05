@@ -26,6 +26,7 @@ public final class DSConfig {
     public static final boolean DISABLE_RECIPE_AWARDING;
     public static final boolean OPTIMIZE_SIMPLE_MODEL;
     public static final boolean REPLACE_VEC3I_HASHING;
+    public static final boolean FAST_SECTION_ITERATING;
 
     static {
         val snapshot = readFromFile();
@@ -41,6 +42,7 @@ public final class DSConfig {
         DISABLE_RECIPE_AWARDING = snapshot.DISABLE_RECIPE_AWARDING;
         OPTIMIZE_SIMPLE_MODEL = snapshot.OPTIMIZE_SIMPLE_MODEL;
         REPLACE_VEC3I_HASHING = snapshot.REPLACE_VEC3I_HASHING;
+        FAST_SECTION_ITERATING = snapshot.FAST_SECTION_ITERATING;
     }
 
     private DSConfig() {
@@ -74,6 +76,8 @@ public final class DSConfig {
         public boolean OPTIMIZE_SIMPLE_MODEL = true;
         @SerializedName("Replace hashing algorithm of Vec3i to reduce hash collision")
         public boolean REPLACE_VEC3I_HASHING = true;
+        @SerializedName("Faster chunk section iterating")
+        public boolean FAST_SECTION_ITERATING = true;
     }
 
     @NotNull
@@ -103,7 +107,8 @@ public final class DSConfig {
             NUMBER_TAG_CACHE_END,
             DISABLE_RECIPE_AWARDING,
             OPTIMIZE_SIMPLE_MODEL,
-            REPLACE_VEC3I_HASHING
+            REPLACE_VEC3I_HASHING,
+            FAST_SECTION_ITERATING
         );
         val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
         try (val writer = Files.newBufferedWriter(path)) {
