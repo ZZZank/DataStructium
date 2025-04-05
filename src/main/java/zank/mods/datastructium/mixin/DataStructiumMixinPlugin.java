@@ -27,17 +27,27 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         OVERRIDE_FACTORIES.add(key -> {
             val parts = key.split("\\.");
             return parts.length > 1 && "mods".equals(parts[0])
-                ? () -> FMLLoader.getLoadingModList().getModFileById(parts[1]) != null
+                ? () -> modPresent(parts[1])
                 : null;
         });
-        addOverride("cache_number_tag", DSConfig.CACHE_NUMBER_TAG);
-        addOverride("optimize_small_model", DSConfig.OPTIMIZE_SIMPLE_MODEL);
-        addOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
-        addOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
+        constantOverride("cache_number_tag", DSConfig.CACHE_NUMBER_TAG);
+        constantOverride("optimize_small_model", DSConfig.OPTIMIZE_SIMPLE_MODEL);
+        constantOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
+        constantOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
+        constantOverride("compound_tag_internal", DSConfig.TIERED_COMPOUND_TAG_INTERNAL);
+        constantOverride("block_pos_hashing", DSConfig.REPLACE_BLOCK_POS_HASHING);
     }
 
-    private static void addOverride(String key, Boolean value) {
+    private static boolean modPresent(String modId) {
+        return FMLLoader.getLoadingModList().getModFileById(modId) != null;
+    }
+
+    private static void constantOverride(String key, Boolean value) {
         OVERRIDES.put(key, () -> value);
+    }
+
+    private static void override(String key, Supplier<Boolean> value) {
+        OVERRIDES.put(key, value);
     }
 
     @Override

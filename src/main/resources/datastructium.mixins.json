@@ -5,22 +5,22 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "misc.MixinScanner",
-    "misc.MixinServerPlayer",
-    "data_struct.MixinBlockPos",
-    "data_struct.MixinCompoundTag",
-    "data_struct.MixinCompoundTag$MixinTagType",
     "cache_number_tag.MixinDoubleTag",
     "cache_number_tag.MixinFloatTag",
-    "cache_number_tag.MixinIntTag"
+    "cache_number_tag.MixinIntTag",
+    "compound_tag_internal.MixinCompoundTag",
+    "compound_tag_internal.MixinCompoundTag1",
+    "block_pos_hashing.MixinBlockPos",
+    "misc.MixinScanner",
+    "misc.MixinServerPlayer"
   ],
   "server": [],
   "client": [
+    "cache_shader_uniform.GLStateManagerMixin",
+    "canonicalize_quads.MixinBakedQuads",
     "misc.RebuildTaskMixin",
     "optimize_small_model.MixinMultiPartBakedModel",
-    "optimize_small_model.MixinSimpleBakedModel",
-    "cache_shader_uniform.GLStateManagerMixin",
-    "canonicalize_quads.MixinBakedQuads"
+    "optimize_small_model.MixinSimpleBakedModel"
   ],
   "injectors": {
     "defaultRequire": 1

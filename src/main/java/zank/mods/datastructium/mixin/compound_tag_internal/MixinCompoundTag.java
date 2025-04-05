@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.data_struct;
+package zank.mods.datastructium.mixin.compound_tag_internal;
 
 import net.minecraft.nbt.*;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,27 +20,9 @@ public abstract class MixinCompoundTag {
     private static Map<String, Tag> replaceInternal(Map<String, Tag> map) {
         if (map instanceof TieredInternalMap) {
             return map;
-        } else if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
+        } else if (DSConfig.DEDUPLICATE_COMPOUND_TAG_KEYS) {
             return new InternedTieredMap<>(map);
         }
-        return map;
-    }
-
-    @Mixin(targets = "net.minecraft.nbt.CompoundTag$1")
-    public static abstract class MixinTagType {
-
-        @ModifyVariable(
-            method = "load(Ljava/io/DataInput;ILnet/minecraft/nbt/NbtAccounter;)Lnet/minecraft/nbt/CompoundTag;",
-            at = @At(
-                value = "INVOKE_ASSIGN",
-                target = "Lcom/google/common/collect/Maps;newHashMap()Ljava/util/HashMap;"
-            )
-        )
-        private Map<String, Tag> replaceMap(Map<String, Tag> map) {
-            if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
-                return new InternedTieredMap<>();
-            }
-            return map;
-        }
+        return new TieredInternalMap<>(map);
     }
 }

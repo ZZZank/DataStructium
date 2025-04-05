@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.data_struct;
+package zank.mods.datastructium.mixin.block_pos_hashing;
 
 import it.unimi.dsi.fastutil.HashCommon;
 import net.minecraft.core.BlockPos;
