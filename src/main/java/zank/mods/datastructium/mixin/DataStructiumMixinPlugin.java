@@ -61,6 +61,10 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (DSConfig.DISABLE_ALL_MIXINS) {
+            return false;
+        }
+
         val dotMixinClass = mixinClassName.replace('/', '.');
         if (!dotMixinClass.startsWith(MIXIN_PACKAGE_ROOT)) {
             LOGGER.error(

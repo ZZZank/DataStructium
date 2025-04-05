@@ -14,6 +14,7 @@ import java.nio.file.Files;
  * @author ZZZank
  */
 public final class DSConfig {
+    public static final boolean DISABLE_ALL_MIXINS;
     public static final boolean CANONICALIZE_QUADS;
     public static final boolean CACHE_SHADER_UNIFORMS;
     public static final boolean TIERED_COMPOUND_TAG_INTERNAL;
@@ -28,6 +29,7 @@ public final class DSConfig {
 
     static {
         val snapshot = readFromFile();
+        DISABLE_ALL_MIXINS = snapshot.DISABLE_ALL_MIXINS;
         CANONICALIZE_QUADS = snapshot.CANONICALIZE_QUADS;
         CACHE_SHADER_UNIFORMS = snapshot.CACHE_SHADER_UNIFORMS;
         TIERED_COMPOUND_TAG_INTERNAL = snapshot.TIERED_COMPOUND_TAG_INTERNAL;
@@ -48,6 +50,8 @@ public final class DSConfig {
     @AllArgsConstructor
     @NoArgsConstructor
     private static class Snapshot {
+        @SerializedName("Disable All Mixins")
+        public boolean DISABLE_ALL_MIXINS = false;
         @SerializedName("Canonicalize Quads")
         public boolean CANONICALIZE_QUADS = false;
         @SerializedName("Cache Shader Uniforms")
@@ -88,6 +92,7 @@ public final class DSConfig {
 
     static void save() {
         val snapshot = new Snapshot(
+            DISABLE_ALL_MIXINS,
             CANONICALIZE_QUADS,
             CACHE_SHADER_UNIFORMS,
             TIERED_COMPOUND_TAG_INTERNAL,
