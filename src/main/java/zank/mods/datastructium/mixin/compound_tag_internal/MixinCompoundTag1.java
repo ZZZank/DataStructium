@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * @author ZZZank
  */
-@Mixin(targets = "net.minecraft.nbt.CompoundTag$1")
+@Mixin(targets = "net/minecraft/nbt/CompoundTag$1")
 public abstract class MixinCompoundTag1 {
 
     @Redirect(
