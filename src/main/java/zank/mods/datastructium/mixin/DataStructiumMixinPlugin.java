@@ -8,10 +8,8 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -21,14 +19,14 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
 
     public static final String MIXIN_PACKAGE_ROOT = DataStructiumMixinPlugin.class.getPackage().getName() + '.';
     public static final Logger LOGGER = LogManager.getLogger(DataStructiumMixinPlugin.class.getSimpleName());
-    public static final Map<String, Supplier<Boolean>> OVERRIDES = new HashMap<>();
+    private static final Map<String, Supplier<Boolean>> OVERRIDES = new HashMap<>();
+    private static final List<Function<String, Supplier<Boolean>>> OVERRIDE_FACTORIES = new ArrayList<>();
 
     static {
-        OVERRIDES.put("mods.kubejs", modPresent("kubejs"));
-        OVERRIDES.put("mods.masterfulmachinery", modPresent("masterfulmachinery"));
-        OVERRIDES.put("mods.jeresources", modPresent("jeresources"));
-        OVERRIDES.put("mods.industrialforegoing", modPresent("industrialforegoing"));
-        OVERRIDES.put("mods.farmersdelight", modPresent("farmersdelight"));
+        OVERRIDE_FACTORIES.add(key -> {
+            val parts = key.split("\\.");
+            return parts.length > 1 && "mods".equals(parts[0]) ? modPresent(parts[1]) : null;
+        });
     }
 
     private static Supplier<Boolean> modPresent(String modId) {
@@ -65,7 +63,12 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         }
 
         val key = trimmed.substring(0, lastIndex);
-        val override = OVERRIDES.get(key);
+        val override = OVERRIDES.computeIfAbsent(
+            key, k -> OVERRIDE_FACTORIES.stream()
+                .map(f -> f.apply(k))
+                .findFirst()
+                .orElse(null)
+        );
         if (override == null) {
             // no override
             return true;
