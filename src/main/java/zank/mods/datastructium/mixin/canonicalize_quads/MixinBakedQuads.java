@@ -12,7 +12,7 @@ import zank.mods.datastructium.pools.Pools;
 @Mixin(value = BakedQuad.class, priority = 345)
 public abstract class MixinBakedQuads {
 
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true, ordinal = 1)
+    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private static int[] deduplicateQuads(int[] vertices) {
         return Pools.QUADS.unique(vertices);
     }

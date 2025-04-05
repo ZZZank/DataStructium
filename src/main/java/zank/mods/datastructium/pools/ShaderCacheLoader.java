@@ -8,14 +8,10 @@ import zank.mods.datastructium.DataStructium;
 
 public final class ShaderCacheLoader {
 
-    public static final Int2ObjectMap<ShaderProgramCache> SHADER_CACHE = new Int2ObjectOpenHashMap<>();
+    private static final Int2ObjectMap<ShaderProgramCache> SHADER_CACHE = new Int2ObjectOpenHashMap<>();
 
     public static void reload(String log) {
         RenderSystem.assertThread(RenderSystem::isOnRenderThread);
-        if (!DSConfig.CACHE_SHADER_UNIFORMS) {
-            return;
-        }
-
         DataStructium.LOGGER.info("Shader cache reload({})", log);
         SHADER_CACHE.clear();
     }
