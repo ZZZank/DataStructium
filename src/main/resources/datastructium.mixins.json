@@ -3,22 +3,29 @@
   "required": true,
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
+  "plugin": "zank.mods.datastructium.mixin.DataStructiumMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "block_pos_hashing.MixinBlockPos",
     "cache_number_tag.MixinDoubleTag",
     "cache_number_tag.MixinFloatTag",
     "cache_number_tag.MixinIntTag",
     "compound_tag_internal.MixinCompoundTag",
     "compound_tag_internal.MixinCompoundTag1",
-    "block_pos_hashing.MixinBlockPos",
     "misc.MixinScanner",
-    "misc.MixinServerPlayer"
+    "misc.MixinServerPlayer",
+    "mods.farmersdelight.MixinToolIngredient",
+    "mods.jeresources.MixinMobWrapper",
+    "mods.kubejs.MixinKubeJSResourcePack",
+    "mods.masterfulmachinery.MixinMachineStructureRecipe",
+    "mods.masterfulmachinery.MixinMachineStructureRecipeData"
   ],
   "server": [],
   "client": [
     "cache_shader_uniform.GLStateManagerMixin",
     "canonicalize_quads.MixinBakedQuads",
     "misc.RebuildTaskMixin",
+    "mods.industrialforegoing.MixinJEICustomPlugin",
     "optimize_small_model.MixinMultiPartBakedModel",
     "optimize_small_model.MixinSimpleBakedModel"
   ],
