@@ -4,6 +4,7 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -13,6 +14,14 @@ import java.util.function.Function;
 public class InternedTieredMap<V> extends TieredInternalMap<String, V> {
 
     private static final Interner<String> INTERNER = Interners.newWeakInterner();
+
+    public InternedTieredMap(Map<String, V> map) {
+        super(map);
+    }
+
+    public InternedTieredMap() {
+        super();
+    }
 
     private static String intern(String key) {
         return key != null ? INTERNER.intern(key) : null;

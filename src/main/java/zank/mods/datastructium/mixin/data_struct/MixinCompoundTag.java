@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import zank.mods.datastructium.DSConfig;
+import zank.mods.datastructium.utils.InternedTieredMap;
 import zank.mods.datastructium.utils.TieredInternalMap;
 
 import java.util.Map;
@@ -19,9 +20,8 @@ public abstract class MixinCompoundTag {
     private static Map<String, Tag> replaceInternal(Map<String, Tag> map) {
         if (map instanceof TieredInternalMap) {
             return map;
-        }
-        if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
-            return new TieredInternalMap<>(map);
+        } else if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
+            return new InternedTieredMap<>(map);
         }
         return map;
     }
@@ -38,7 +38,7 @@ public abstract class MixinCompoundTag {
         )
         private Map<String, Tag> replaceMap(Map<String, Tag> map) {
             if (DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
-                return new TieredInternalMap<>();
+                return new InternedTieredMap<>();
             }
             return map;
         }
