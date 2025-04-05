@@ -19,8 +19,8 @@
     "misc.RebuildTaskMixin",
     "optimize_small_model.MixinMultiPartBakedModel",
     "optimize_small_model.MixinSimpleBakedModel",
-    "deduplicate.GLStateManagerMixin",
-    "deduplicate.MixinBakedQuads"
+    "cache_shader_uniform.GLStateManagerMixin",
+    "canonicalize_quads.MixinBakedQuads"
   ],
   "injectors": {
     "defaultRequire": 1
