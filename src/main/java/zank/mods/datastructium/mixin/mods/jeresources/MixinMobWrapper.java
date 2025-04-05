@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.*;
  * @author ZZZank
  */
 @Mixin(value = MobWrapper.class, remap = false)
-@Pseudo
 public class MixinMobWrapper {
     @Shadow
     @Final

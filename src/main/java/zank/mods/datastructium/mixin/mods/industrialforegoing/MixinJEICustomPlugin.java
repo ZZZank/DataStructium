@@ -7,7 +7,6 @@ import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import zank.mods.datastructium.mods.industrialforegoing.StoneWorkRecipeGatherer;
@@ -18,7 +17,6 @@ import java.util.List;
  * @author ZZZank
  */
 @Mixin(value = JEICustomPlugin.class)
-@Pseudo
 public abstract class MixinJEICustomPlugin {
 
     @Redirect(

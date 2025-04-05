@@ -4,7 +4,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -19,7 +18,6 @@ import java.util.stream.Stream;
  * @author ZZZank
  */
 @Mixin(ToolIngredient.class)
-@Pseudo
 public class MixinToolIngredient {
     @Unique
     private static Collection<ItemStack> dataStruct$cachedStacks;

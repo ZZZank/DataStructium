@@ -12,7 +12,6 @@ import zank.mods.datastructium.mods.masterfulmachinery.MachineStructureRecipeDat
  * @author ZZZank
  */
 @Mixin(value = MachineStructureRecipeData.class, remap = false)
-@Pseudo
 public abstract class MixinMachineStructureRecipeData implements MachineStructureRecipeDataExtension {
     @Unique
     private String[] dataStruct$colonSplitTag;
