@@ -8,12 +8,17 @@ import java.util.NoSuchElementException;
 
 /**
  * backported from ModernFix for MC 1.20, because ModernFix for 1.16 is EOL
+ *
  * @author embeddedt
  * @link <a href="https://github.com/embeddedt/ModernFix/blob/fcea407708a4a784c4076e080540d9264778f15a/common/src/main/java/org/embeddedt/modernfix/common/mixin/perf/chunk_meshing/RebuildTaskMixin.java">Source</a>
  */
 public class SectionBlockPosIterator implements Iterator<BlockPos> {
     public static final int SECTION_SIZE = 1 << 4;
     public static final int SECTION_MASK = 0b1111;
+
+    public static Iterable<BlockPos> iterate(int baseX, int baseY, int baseZ) {
+        return () -> new SectionBlockPosIterator(baseX, baseY, baseZ);
+    }
 
     private final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
     private int index = 0;
@@ -23,10 +28,6 @@ public class SectionBlockPosIterator implements Iterator<BlockPos> {
         this.baseX = baseX;
         this.baseY = baseY;
         this.baseZ = baseZ;
-    }
-
-    public SectionBlockPosIterator(BlockPos pos) {
-        this(pos.getX(), pos.getY(), pos.getZ());
     }
 
     @Override

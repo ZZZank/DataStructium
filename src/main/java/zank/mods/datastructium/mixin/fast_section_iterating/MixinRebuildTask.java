@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.misc;
+package zank.mods.datastructium.mixin.fast_section_iterating;
 
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,6 +14,6 @@ public abstract class MixinRebuildTask {
      */
     @Redirect(method = "compile", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/BlockPos;betweenClosed(Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Ljava/lang/Iterable;"))
     private Iterable<BlockPos> fastBetweenClosed(BlockPos firstPos, BlockPos secondPos) {
-        return () -> new SectionBlockPosIterator(firstPos);
+        return SectionBlockPosIterator.iterate(firstPos.getX(), firstPos.getY(), firstPos.getZ());
     }
 }
