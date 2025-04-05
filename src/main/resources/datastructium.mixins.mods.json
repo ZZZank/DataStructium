@@ -3,6 +3,7 @@
   "required": true,
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
+  "plugin": "zank.mods.datastructium.mixin.DataStructiumMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "farmersdelight.MixinToolIngredient",
