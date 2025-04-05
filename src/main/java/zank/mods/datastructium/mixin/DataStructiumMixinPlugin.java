@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import zank.mods.datastructium.DSConfig;
 
 import java.util.*;
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * @author ZZZank
@@ -20,8 +20,8 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
 
     public static final String MIXIN_PACKAGE_ROOT = DataStructiumMixinPlugin.class.getPackage().getName() + '.';
     public static final Logger LOGGER = LogManager.getLogger(DataStructiumMixinPlugin.class.getSimpleName());
-    private static final Map<String, Supplier<Boolean>> OVERRIDES = new HashMap<>();
-    private static final List<Function<String, Supplier<Boolean>>> OVERRIDE_FACTORIES = new ArrayList<>();
+    private static final Map<String, BooleanSupplier> OVERRIDES = new HashMap<>();
+    private static final List<Function<String, BooleanSupplier>> OVERRIDE_FACTORIES = new ArrayList<>();
 
     static {
         OVERRIDE_FACTORIES.add(key -> {
@@ -42,11 +42,11 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         return FMLLoader.getLoadingModList().getModFileById(modId) != null;
     }
 
-    private static void constantOverride(String key, Boolean value) {
+    private static void constantOverride(String key, boolean value) {
         override(key, () -> value);
     }
 
-    private static void override(String key, Supplier<Boolean> value) {
+    private static void override(String key, BooleanSupplier value) {
         OVERRIDES.put(key, value);
     }
 
@@ -81,21 +81,26 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         }
 
         val key = trimmed.substring(0, lastIndex);
-        val override = OVERRIDES.computeIfAbsent(
-            key, k -> OVERRIDE_FACTORIES.stream()
-                .map(f -> f.apply(k))
+        var got = OVERRIDES.get(key);
+        if (got == null) {
+            got = OVERRIDE_FACTORIES.stream()
+                .map(f -> f.apply(key))
                 .filter(Objects::nonNull)
                 .findFirst()
-                .orElse(null)
-        );
-        if (override == null) {
+                .orElse(null);
+            if (got != null) {
+                override(key, got);
+            }
+        }
+
+        if (got == null) {
             LOGGER.info("No override for mixin class '{}', using default behaviour (approve)", dotMixinClass);
             // no override
             return true;
         }
 
-        val approved = override.get();
-        LOGGER.info("Mixin class '{}' is {} by override", dotMixinClass, approved ? "approved" : "denied");
+        val approved = got.getAsBoolean();
+        LOGGER.info("Mixin class '{}' is {} by override", dotMixinClass, approved ? "approved" : "rejected");
         return approved;
     }
 
