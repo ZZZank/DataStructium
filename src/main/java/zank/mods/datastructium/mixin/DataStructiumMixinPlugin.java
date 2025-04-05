@@ -43,7 +43,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
     }
 
     private static void constantOverride(String key, Boolean value) {
-        OVERRIDES.put(key, () -> value);
+        override(key, () -> value);
     }
 
     private static void override(String key, Supplier<Boolean> value) {
@@ -75,6 +75,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
 
         val lastIndex = trimmed.lastIndexOf('.');
         if (lastIndex == -1) {
+            LOGGER.warn("Mixin class '{}' not categorized, using default behaviour (approve)", dotMixinClass);
             // not categorized
             return true;
         }
@@ -83,15 +84,19 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         val override = OVERRIDES.computeIfAbsent(
             key, k -> OVERRIDE_FACTORIES.stream()
                 .map(f -> f.apply(k))
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null)
         );
         if (override == null) {
+            LOGGER.info("No override for mixin class '{}', using default behaviour (approve)", dotMixinClass);
             // no override
             return true;
         }
 
-        return override.get();
+        val approved = override.get();
+        LOGGER.info("Mixin class '{}' is {} by override", dotMixinClass, approved ? "approved" : "denied");
+        return approved;
     }
 
     @Override
