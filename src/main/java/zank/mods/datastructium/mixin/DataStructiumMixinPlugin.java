@@ -52,6 +52,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         );
         constantOverride("vec3i_hashing", DSConfig.REPLACE_VEC3I_HASHING);
         constantOverride("fast_section_iterating", DSConfig.FAST_SECTION_ITERATING);
+        constantOverride("disable_recipe_awarding", DSConfig.DISABLE_RECIPE_AWARDING);
     }
 
     private static boolean modPresent(String modId) {

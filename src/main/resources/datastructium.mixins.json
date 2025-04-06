@@ -13,7 +13,7 @@
     "compound_tag_internal.MixinCompoundTag$MixinTagType",
     "fast_section_iterating.MixinSectionPos",
     "misc.MixinScanner",
-    "misc.MixinServerPlayer",
+    "disable_recipe_awarding.MixinServerPlayer",
     "mods.farmersdelight.MixinToolIngredient",
     "mods.jeresources.MixinMobWrapper",
     "mods.kubejs.MixinKubeJSResourcePack",
