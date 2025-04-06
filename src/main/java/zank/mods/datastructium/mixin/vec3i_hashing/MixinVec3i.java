@@ -27,7 +27,7 @@ public abstract class MixinVec3i {
 
     /**
      * @author ZZZank
-     * @reason an algorithm with less hash collision in general
+     * @reason use another algorithm with much less hash collision in general
      */
     @Override
     @Overwrite
