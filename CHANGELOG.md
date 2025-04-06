@@ -1,3 +1,17 @@
+## DataStructium 1.7.0 -> 1.7.1
+
+CompoundTag optimization improvement
+
+- ModernFix detection for CompoundTag check
+  - DataStrcutium optimization will be force-disabled when ModernFix is present. This is not the most ideal solution as
+ModernFix's solution is less thorough, but this is more compatible
+  - you can disable this check in config
+- fast copy for CompoundTag
+- smaller Number Tag Cache default size
+- fix a certain part of CompoundTag optimization not working
+
+---
+
 ## DataStructium 1.6.0 -> 1.7.0
 
 - Fixed BlockPos hashing algorithm breaking rendering if ImmersiveEngineering machines
