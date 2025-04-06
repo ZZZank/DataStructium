@@ -14,9 +14,12 @@ import java.nio.file.Files;
  * @author ZZZank
  */
 public final class DSConfig {
+    public static final String CONFIG_NAME = String.format("%s-config.json", DataStructium.MOD_ID);
+
     public static final boolean DISABLE_ALL_MIXINS;
     public static final boolean CANONICALIZE_QUADS;
     public static final boolean CACHE_SHADER_UNIFORMS;
+    public static final boolean COMPOUND_TAG_MODERNFIX;
     public static final boolean TIERED_COMPOUND_TAG_INTERNAL;
     public static final boolean DEDUPLICATE_COMPOUND_TAG_KEYS;
     public static final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
@@ -33,6 +36,7 @@ public final class DSConfig {
         DISABLE_ALL_MIXINS = snapshot.DISABLE_ALL_MIXINS;
         CANONICALIZE_QUADS = snapshot.CANONICALIZE_QUADS;
         CACHE_SHADER_UNIFORMS = snapshot.CACHE_SHADER_UNIFORMS;
+        COMPOUND_TAG_MODERNFIX = snapshot.COMPOUND_TAG_MODERNFIX;
         TIERED_COMPOUND_TAG_INTERNAL = snapshot.TIERED_COMPOUND_TAG_INTERNAL;
         DEDUPLICATE_COMPOUND_TAG_KEYS = snapshot.DEDUPLICATE_COMPOUND_TAG_KEYS;
         COMPOUND_TAG_RECONSTRUCT_THRESHOLD = snapshot.COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
@@ -58,6 +62,8 @@ public final class DSConfig {
         public boolean CANONICALIZE_QUADS = false;
         @SerializedName("Cache Shader Uniforms")
         public boolean CACHE_SHADER_UNIFORMS = true;
+        @SerializedName("Force disable CompoundTag optimization with ModernFix installed")
+        public boolean COMPOUND_TAG_MODERNFIX = true;
         @SerializedName("Tiered Compound Tag Internal")
         public boolean TIERED_COMPOUND_TAG_INTERNAL = true;
         @SerializedName("Deduplicate CompoundTag Keys")
@@ -82,7 +88,7 @@ public final class DSConfig {
 
     @NotNull
     private static Snapshot readFromFile() {
-        val path = FMLPaths.CONFIGDIR.get().resolve(String.format("%s-config.json", DataStructium.MOD_ID));
+        val path = FMLPaths.CONFIGDIR.get().resolve(CONFIG_NAME);
         if (!Files.exists(path)) {
             return new Snapshot();
         }
@@ -99,6 +105,7 @@ public final class DSConfig {
             DISABLE_ALL_MIXINS,
             CANONICALIZE_QUADS,
             CACHE_SHADER_UNIFORMS,
+            COMPOUND_TAG_MODERNFIX,
             TIERED_COMPOUND_TAG_INTERNAL,
             DEDUPLICATE_COMPOUND_TAG_KEYS,
             COMPOUND_TAG_RECONSTRUCT_THRESHOLD,
