@@ -10,7 +10,7 @@
     "cache_number_tag.MixinFloatTag",
     "cache_number_tag.MixinIntTag",
     "compound_tag_internal.MixinCompoundTag",
-    "compound_tag_internal.MixinCompoundTag1",
+    "compound_tag_internal.MixinCompoundTag$MixinTagType",
     "fast_section_iterating.MixinSectionPos",
     "misc.MixinScanner",
     "misc.MixinServerPlayer",

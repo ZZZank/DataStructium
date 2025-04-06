@@ -32,6 +32,10 @@ public class InternedTieredMap<V> extends TieredInternalMap<String, V> {
         return super.put(intern(key), value);
     }
 
+    public void putNoIntern(String key, V value) {
+        super.put(key, value);
+    }
+
     @Override
     public V compute(String key, @NotNull BiFunction<? super String, ? super V, ? extends V> remappingFunction) {
         return super.compute(intern(key), remappingFunction);
