@@ -73,9 +73,9 @@ public final class DSConfig {
         @SerializedName("Cache Number Tag")
         public boolean CACHE_NUMBER_TAG = true;
         @SerializedName("Number Tag Cache starts at (inclusive)")
-        public int NUMBER_TAG_CACHE_START = -4096;
+        public int NUMBER_TAG_CACHE_START = -2048;
         @SerializedName("Number Tag Cache ends at (exclusive)")
-        public int NUMBER_TAG_CACHE_END = 4096;
+        public int NUMBER_TAG_CACHE_END = 2048;
         @SerializedName("Prevent the server from `awarding` recipe data to player recipe book")
         public boolean DISABLE_RECIPE_AWARDING = false;
         @SerializedName("Optimize simple model")
