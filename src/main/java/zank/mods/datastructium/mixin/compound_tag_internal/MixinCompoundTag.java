@@ -45,33 +45,4 @@ public abstract class MixinCompoundTag {
             cir.setReturnValue(new CompoundTag(copied));
         }
     }
-
-    @Mixin(targets = "net.minecraft.nbt.CompoundTag$1")
-    public static abstract class MixinTagType {
-
-        @Redirect(
-            method = "load(Ljava/io/DataInput;ILnet/minecraft/nbt/NbtAccounter;)Lnet/minecraft/nbt/CompoundTag;",
-            at = @At(
-                value = "INVOKE",
-                target = "Lcom/google/common/collect/Maps;newHashMap()Ljava/util/HashMap;"
-            )
-        )
-        private HashMap<?, ?> removeAllocation() {
-            return null;
-        }
-
-        @ModifyVariable(
-            method = "load(Ljava/io/DataInput;ILnet/minecraft/nbt/NbtAccounter;)Lnet/minecraft/nbt/CompoundTag;",
-            at = @At(
-                value = "INVOKE_ASSIGN",
-                target = "Lcom/google/common/collect/Maps;newHashMap()Ljava/util/HashMap;"
-            )
-        )
-        private Map<String, Tag> replaceMap(Map<String, Tag> map) {
-            if (DSConfig.DEDUPLICATE_COMPOUND_TAG_KEYS) {
-                return new InternedTieredMap<>(map);
-            }
-            return new TieredInternalMap<>(map);
-        }
-    }
 }

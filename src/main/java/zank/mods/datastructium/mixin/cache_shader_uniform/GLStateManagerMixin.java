@@ -13,7 +13,8 @@ public abstract class GLStateManagerMixin {
         method = "_glGetUniformLocation",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL20;glGetUniformLocation(ILjava/lang/CharSequence;)I"
+            target = "Lorg/lwjgl/opengl/GL20;glGetUniformLocation(ILjava/lang/CharSequence;)I",
+            remap = false
         )
     )
     private static int getUniform(int program, CharSequence name) {
