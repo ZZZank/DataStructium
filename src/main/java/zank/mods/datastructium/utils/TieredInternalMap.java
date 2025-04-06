@@ -21,23 +21,20 @@ public class TieredInternalMap<K, V> implements Map<K, V> {
     }
 
     public TieredInternalMap(@NotNull Map<K, V> map) {
-        if (map.isEmpty()) {
-            internal = new Object2ObjectArrayMap<>();
-        } else if (map instanceof Object2ObjectMap) {
-            internal = map;
-        } else if (map.size() < DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD) {
-            // initialize key-value pairs by ourselves to avoid checking keys on initialization
-            val keys = new Object[map.size()];
-            val values = new Object[map.size()];
-            int i = 0;
-            for (val entry : map.entrySet()) {
-                keys[i] = entry.getKey();
-                values[i] = entry.getValue();
-                i++;
-            }
-            internal = new Object2ObjectArrayMap<>(keys, values);
+        val selected = selectInitialMap(map);
+        internal = selected;
+        if (selected != map) {
+            putAll(map);
+        }
+    }
+
+    protected Map<K, V> selectInitialMap(@NotNull Map<K, V> incoming) {
+        if (incoming instanceof Object2ObjectMap) {
+            return incoming;
+        } else if (incoming.size() < DSConfig.COMPOUND_TAG_RECONSTRUCT_THRESHOLD) {
+            return new Object2ObjectArrayMap<>();
         } else {
-            internal = new Object2ObjectOpenHashMap<>(map);
+            return new Object2ObjectOpenHashMap<>();
         }
     }
 
