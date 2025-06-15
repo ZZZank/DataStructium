@@ -54,7 +54,9 @@ dependencies {
 
     modCompileOnly("curse.maven:just-enough-resources-jer-240630:4526612")
 
-    modCompileOnly("dev.latvian.mods:kubejs-forge:1605.3.19-build.299")
+    modCompileOnly("dev.latvian.mods:kubejs-forge:1605.3.19-build.299") {
+        exclude([module: "rhino-forge"])
+    }
 
     modCompileOnly("curse.maven:farmers-delight-398521:3765350")
 
