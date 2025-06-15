@@ -27,6 +27,8 @@
     "canonicalize_quads.MixinBakedQuads",
     "fast_section_iterating.MixinRebuildTask",
     "mods.industrialforegoing.MixinJEICustomPlugin",
+    "mods.oculus.MixinIris",
+    "mods.oculus.MixinPipelineManager",
     "optimize_small_model.MixinMultiPartBakedModel",
     "optimize_small_model.MixinSimpleBakedModel"
   ],
