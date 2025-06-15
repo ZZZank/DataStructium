@@ -13,6 +13,8 @@
     "compound_tag_internal.MixinCompoundTag1",
     "disable_recipe_awarding.MixinServerPlayer",
     "fast_section_iterating.MixinSectionPos",
+    "ingredient_deduplication.MixinIngredient",
+    "ingredient_deduplication.MixinIngredientItemValue",
     "misc.MixinScanner",
     "mods.farmersdelight.MixinToolIngredient",
     "mods.jeresources.MixinMobWrapper",

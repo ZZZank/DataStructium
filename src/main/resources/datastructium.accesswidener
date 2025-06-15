@@ -7,3 +7,5 @@ accessible method net/minecraft/nbt/FloatTag <init> (F)V
 accessible method net/minecraft/nbt/DoubleTag <init> (D)V
 accessible method net/minecraft/nbt/IntTag <init> (I)V
 accessible method net/minecraft/nbt/CompoundTag <init> (Ljava/util/Map;)V
+
+accessible field net/minecraft/world/item/crafting/Ingredient$ItemValue item Lnet/minecraft/world/item/ItemStack;
