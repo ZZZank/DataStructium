@@ -41,7 +41,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
                 } else if (DSConfig.COMPOUND_TAG_MODERNFIX && modPresent("modernfix")) {
                     LOGGER.warn(
                         "ModernFix installed, force disabling CompoundTag optimization. You can change this behaviour in '{}'",
-                        DSConfig.CONFIG_NAME
+                        DSConfig.CONFIG_FILE_NAME
                     );
                     LOGGER.warn(
                         "If you're about to disable this check, remember to also disable 'mixin.perf.nbt_memory_usage' in ModernFix config");
