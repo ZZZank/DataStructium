@@ -1,4 +1,4 @@
-package zank.mods.datastructium.mixin.ingredient_deduplication;
+package zank.mods.datastructium.mixin.deduplicate_ingredient;
 
 
 import net.minecraft.world.item.ItemStack;

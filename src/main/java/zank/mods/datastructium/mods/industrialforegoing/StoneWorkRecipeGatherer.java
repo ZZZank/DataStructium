@@ -32,23 +32,26 @@ public class StoneWorkRecipeGatherer {
     private static List<CraftingRecipe> SMALL_CRAFT;
     private static List<CraftingRecipe> BIG_CRAFT;
 
-    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_SMELT =
-        createAction((level, stack) -> SMELT.stream()
+    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_SMELT = (level, stack) ->
+        SMELT.stream()
             .filter(getRecipeFilter(level, genCraftingInventory(stack, 1, 1)))
             .findFirst()
-            .orElse(null));
-    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_SMALL_CRAFT =
-        createAction((level, stack) -> SMALL_CRAFT.stream()
+            .map(Recipe::getResultItem)
+            .orElse(ItemStack.EMPTY);
+    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_SMALL_CRAFT = (level, stack) ->
+        SMALL_CRAFT.stream()
             .filter(getRecipeFilter(level, genCraftingInventory(stack, 2, 2)))
             .findFirst()
-            .orElse(null));
-    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_BIG_CRAFT =
-        createAction((level, stack) -> BIG_CRAFT.stream()
+            .map(Recipe::getResultItem)
+            .orElse(ItemStack.EMPTY);
+    public static final BiFunction<Level, ItemStack, ItemStack> ACTION_BIG_CRAFT = (level, stack) ->
+        BIG_CRAFT.stream()
             .filter(getRecipeFilter(level, genCraftingInventory(stack, 3, 3)))
             .findFirst()
-            .orElse(null));
+            .map(Recipe::getResultItem)
+            .orElse(ItemStack.EMPTY);
 
-    private static <T extends Container> Predicate<? super Recipe<T>> getRecipeFilter(Level level, T container) {
+    private static <T extends Container> Predicate<Recipe<T>> getRecipeFilter(Level level, T container) {
         return recipe -> recipe.matches(container, level);
     }
 
@@ -83,15 +86,6 @@ public class StoneWorkRecipeGatherer {
         SMELT = null;
         SMALL_CRAFT = null;
         BIG_CRAFT = null;
-    }
-
-    private static BiFunction<Level, ItemStack, ItemStack> createAction(
-        BiFunction<Level, ItemStack, Recipe<?>> recipeFinder
-    ) {
-        return (level, stack) -> {
-            val recipe = recipeFinder.apply(level, stack);
-            return recipe == null ? ItemStack.EMPTY : recipe.getResultItem();
-        };
     }
 
     private static BiFunction<Level, ItemStack, ItemStack> getWork(StoneWorkAction mode) {

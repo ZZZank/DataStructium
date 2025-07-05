@@ -29,6 +29,7 @@ public final class DSConfig {
     public static final boolean OPTIMIZE_SIMPLE_MODEL;
     public static final boolean REPLACE_VEC3I_HASHING;
     public static final boolean FAST_SECTION_ITERATING;
+    public static final boolean DEDUPLICATE_INGREDIENT;
 
     static {
         val cfg = new SimpleConfig();
@@ -48,6 +49,7 @@ public final class DSConfig {
         OPTIMIZE_SIMPLE_MODEL = cfg.getBool("Optimize simple model", true);
         REPLACE_VEC3I_HASHING = cfg.getBool("Replace hashing algorithm of Vec3i to reduce hash collision", true);
         FAST_SECTION_ITERATING = cfg.getBool("Faster chunk section iterating", true);
+        DEDUPLICATE_INGREDIENT = cfg.getBool("Deduplicate Item Ingredient", false);
     }
 
     static void save() {

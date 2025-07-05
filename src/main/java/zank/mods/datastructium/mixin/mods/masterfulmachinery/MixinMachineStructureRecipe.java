@@ -57,19 +57,15 @@ public abstract class MixinMachineStructureRecipe {
                 val port = data.getPort();
                 val be = world.getBlockEntity(pos);
 
-                if (be instanceof IMachinePortTile
-                    && blockState.getBlock() instanceof MachinePortBlock
+                if (be instanceof IMachinePortTile portTile
+                    && blockState.getBlock() instanceof MachinePortBlock portBlock
+                    && portTile.isInput() == port.isInput()
+                    && portBlock.getPortTypeId().equals(RLUtils.toRL(port.getType()))
                 ) {
-                    val portTile = (IMachinePortTile) be;
-                    val portBlock = ((MachinePortBlock) blockState.getBlock());
-                    if (portTile.isInput() == port.isInput()
-                        && portBlock.getPortTypeId().equals(RLUtils.toRL(port.getType()))
-                    ) {
-                        val controllerIds = port.getControllerId() != null
-                            ? port.getControllerId()
-                            : this.controllerId;
-                        valid = controllerIds.contains(portBlock.getControllerId());
-                    }
+                    val controllerIds = port.getControllerId() != null
+                        ? port.getControllerId()
+                        : this.controllerId;
+                    valid = controllerIds.contains(portBlock.getControllerId());
                 }
             }
 
