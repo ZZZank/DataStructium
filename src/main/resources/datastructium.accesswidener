@@ -9,3 +9,7 @@ accessible method net/minecraft/nbt/IntTag <init> (I)V
 accessible method net/minecraft/nbt/CompoundTag <init> (Ljava/util/Map;)V
 
 accessible field net/minecraft/world/item/crafting/Ingredient$ItemValue item Lnet/minecraft/world/item/ItemStack;
+
+accessible method net/minecraft/nbt/CompoundTag readNamedTagType (Ljava/io/DataInput;Lnet/minecraft/nbt/NbtAccounter;)B
+accessible method net/minecraft/nbt/CompoundTag readNamedTagName (Ljava/io/DataInput;Lnet/minecraft/nbt/NbtAccounter;)Ljava/lang/String;
+accessible method net/minecraft/nbt/CompoundTag readNamedTagData (Lnet/minecraft/nbt/TagType;Ljava/lang/String;Ljava/io/DataInput;ILnet/minecraft/nbt/NbtAccounter;)Lnet/minecraft/nbt/Tag;

@@ -35,19 +35,16 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         constantOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
         constantOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
         override(
-            "compound_tag_internal", () -> {
-                if (!DSConfig.TIERED_COMPOUND_TAG_INTERNAL) {
-                    return false;
-                } else if (DSConfig.COMPOUND_TAG_MODERNFIX && modPresent("modernfix")) {
+            "compound_tag_keys", () -> {
+                var enable = DSConfig.DEDUPLICATE_COMPOUND_TAG_KEYS;
+                if (DSConfig.COMPOUND_TAG_MODERNFIX && modPresent("modernfix")) {
                     LOGGER.warn(
-                        "ModernFix installed, force disabling CompoundTag optimization. You can change this behaviour in '{}'",
+                        "ModernFix installed, force disabling CompoundTag optimization. You can change this behaviour in './config/{}'",
                         DSConfig.CONFIG_FILE_NAME
                     );
-                    LOGGER.warn(
-                        "If you're about to disable this check, remember to also disable 'mixin.perf.nbt_memory_usage' in ModernFix config");
-                    return false;
+                    enable = false;
                 }
-                return true;
+                return enable;
             }
         );
         constantOverride("vec3i_hashing", DSConfig.REPLACE_VEC3I_HASHING);
