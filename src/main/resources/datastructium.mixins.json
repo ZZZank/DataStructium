@@ -18,6 +18,7 @@
     "mods.farmersdelight.MixinToolIngredient",
     "mods.jeresources.MixinMobWrapper",
     "mods.kubejs.MixinKubeJSResourcePack",
+    "mods.masterfulmachinery.structure_check.MixinControllerBlockEntity",
     "mods.masterfulmachinery.MixinMachineStructureRecipe",
     "mods.masterfulmachinery.MixinMachineStructureRecipeData",
     "vec3i_hashing.MixinVec3i"

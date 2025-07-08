@@ -29,6 +29,7 @@ public final class DSConfig {
     public static final boolean REPLACE_VEC3I_HASHING;
     public static final boolean FAST_SECTION_ITERATING;
     public static final boolean DEDUPLICATE_INGREDIENT;
+    public static final int MM_STRUCTURE_CHECK_INTERVAL;
 
     static {
         val cfg = new SimpleConfig();
@@ -48,6 +49,7 @@ public final class DSConfig {
         REPLACE_VEC3I_HASHING = cfg.getBool("Replace hashing algorithm of Vec3i to reduce hash collision", true);
         FAST_SECTION_ITERATING = cfg.getBool("Faster chunk section iterating", true);
         DEDUPLICATE_INGREDIENT = cfg.getBool("Deduplicate Item Ingredient", false);
+        MM_STRUCTURE_CHECK_INTERVAL = cfg.getInt("MasterfulMachinery structure check interval (in ticks, set to 0 or less to disable)", 5);
     }
 
     static void save() {

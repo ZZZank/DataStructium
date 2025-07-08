@@ -51,6 +51,10 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         constantOverride("fast_section_iterating", DSConfig.FAST_SECTION_ITERATING);
         constantOverride("disable_recipe_awarding", DSConfig.DISABLE_RECIPE_AWARDING);
         constantOverride("deduplicate_ingredient", DSConfig.DEDUPLICATE_INGREDIENT);
+        constantOverride(
+            "mods.masterfulmachinery.structure_check",
+            modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
+        );
     }
 
     private static boolean modPresent(String modId) {
