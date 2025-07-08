@@ -23,14 +23,15 @@ public abstract class MixinControllerBlockEntity extends UpdatableTile {
         at = @At(
             value = "FIELD",
             target = "Lcom/ticticboooom/mods/mm/block/tile/ControllerBlockEntity;processData:Lcom/ticticboooom/mods/mm/model/ProcessUpdate;",
-            ordinal = 0
+            ordinal = 0,
+            remap = false
         ),
         cancellable = true
     )
     private void skipActionByInterval(CallbackInfo ci) {
         if (dataStructium$counter != 0) {
-            this.update(); // this will happen regardless of `foundStructure`
             ci.cancel();
+            this.update(); // this will happen regardless of `foundStructure`
         }
 
         dataStructium$counter++;
