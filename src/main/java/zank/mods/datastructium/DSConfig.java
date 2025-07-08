@@ -18,8 +18,6 @@ public final class DSConfig {
     public static final boolean DISABLE_ALL_MIXINS;
     public static final boolean CANONICALIZE_QUADS;
     public static final boolean CACHE_SHADER_UNIFORMS;
-    public static final boolean COMPOUND_TAG_MODERNFIX;
-    public static final boolean DEDUPLICATE_COMPOUND_TAG_KEYS;
     public static final int COMPOUND_TAG_RECONSTRUCT_THRESHOLD;
     public static final boolean CACHE_NUMBER_TAG;
     public static final int NUMBER_TAG_CACHE_START;
@@ -38,8 +36,6 @@ public final class DSConfig {
         DISABLE_ALL_MIXINS = cfg.getBool("Disable All Mixins", false);
         CANONICALIZE_QUADS = cfg.getBool("Canonicalize Quads", false);
         CACHE_SHADER_UNIFORMS = cfg.getBool("Cache Shader Uniforms", true);
-        COMPOUND_TAG_MODERNFIX = cfg.getBool("Force disable CompoundTag optimization with ModernFix installed", true);
-        DEDUPLICATE_COMPOUND_TAG_KEYS = cfg.getBool("Deduplicate CompoundTag Keys", true);
         COMPOUND_TAG_RECONSTRUCT_THRESHOLD = cfg.getInt("Compound Tag Internal Reconstruct Threshold", 5);
         NUMBER_TAG_CACHE_START = cfg.getInt("Number Tag Cache starts at (inclusive)", -2048);
         NUMBER_TAG_CACHE_END = cfg.getInt("Number Tag Cache ends at (exclusive)", 2048);

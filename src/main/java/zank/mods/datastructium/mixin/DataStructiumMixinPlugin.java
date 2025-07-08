@@ -34,26 +34,13 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         constantOverride("optimize_small_model", DSConfig.OPTIMIZE_SIMPLE_MODEL);
         constantOverride("cache_shader_uniform", DSConfig.CACHE_SHADER_UNIFORMS);
         constantOverride("canonicalize_quads", DSConfig.CANONICALIZE_QUADS);
-        override(
-            "compound_tag_keys", () -> {
-                var enable = DSConfig.DEDUPLICATE_COMPOUND_TAG_KEYS;
-                if (DSConfig.COMPOUND_TAG_MODERNFIX && modPresent("modernfix")) {
-                    LOGGER.warn(
-                        "ModernFix installed, force disabling CompoundTag optimization. You can change this behaviour in './config/{}'",
-                        DSConfig.CONFIG_FILE_NAME
-                    );
-                    enable = false;
-                }
-                return enable;
-            }
-        );
         constantOverride("vec3i_hashing", DSConfig.REPLACE_VEC3I_HASHING);
         constantOverride("fast_section_iterating", DSConfig.FAST_SECTION_ITERATING);
         constantOverride("disable_recipe_awarding", DSConfig.DISABLE_RECIPE_AWARDING);
         constantOverride("deduplicate_ingredient", DSConfig.DEDUPLICATE_INGREDIENT);
-        constantOverride(
+        override(
             "mods.masterfulmachinery.structure_check",
-            modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
+            () -> modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
         );
     }
 
@@ -84,16 +71,18 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             return false;
         }
 
+        // a.b.c.d.E
         val dotMixinClass = mixinClassName.replace('/', '.');
         if (!dotMixinClass.startsWith(MIXIN_PACKAGE_ROOT)) {
             LOGGER.error(
-                "Expected mixin '{}' to start with package root '{}', treating as foreign and disabling!",
+                "Mixin '{}' not starting with package '{}', treating as foreign and disabling!",
                 dotMixinClass,
                 MIXIN_PACKAGE_ROOT
             );
             return false;
         }
 
+        // c.d.E
         val trimmed = dotMixinClass.substring(MIXIN_PACKAGE_ROOT.length());
 
         val lastIndex = trimmed.lastIndexOf('.');
@@ -103,7 +92,9 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             return true;
         }
 
+        // c.d
         val key = trimmed.substring(0, lastIndex);
+
         var got = OVERRIDES.get(key);
         if (got == null) {
             got = OVERRIDE_FACTORIES.stream()
