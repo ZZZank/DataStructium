@@ -3,7 +3,7 @@
 CompoundTag optimization improvement
 
 - ModernFix detection for CompoundTag check
-  - DataStrcutium optimization will be force-disabled when ModernFix is present. This is not the most ideal solution as
+  - DataStructium optimization will be force-disabled when ModernFix is present. This is not the most ideal solution as
 ModernFix's solution is less thorough, but this is more compatible
   - you can disable this check in config
 - fast copy for CompoundTag
