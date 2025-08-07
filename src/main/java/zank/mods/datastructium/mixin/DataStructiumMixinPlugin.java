@@ -42,6 +42,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             "mods.masterfulmachinery.structure_check",
             () -> modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
         );
+        override("mods.oculus", () -> modPresent("oculus") && DSConfig.CACHE_SHADER_UNIFORMS);
     }
 
     private static boolean modPresent(String modId) {

@@ -25,13 +25,7 @@ public final class ShaderProgramCache {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj instanceof ShaderProgramCache cache) {
-            return Objects.equals(this.id, cache.id);
-        } else {
-            return false;
-        }
+        return obj == this || obj instanceof ShaderProgramCache cache && this.id == cache.id;
     }
 
     @Override

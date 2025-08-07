@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import zank.mods.datastructium.DSConfig;
 import zank.mods.datastructium.pools.ShaderCacheLoader;
 
 /**
@@ -16,6 +15,7 @@ import zank.mods.datastructium.pools.ShaderCacheLoader;
 
 @Mixin(value = PipelineManager.class, remap = false)
 public abstract class MixinPipelineManager {
+
     @Inject(
         method = "preparePipeline",
         at = @At(
@@ -27,8 +27,6 @@ public abstract class MixinPipelineManager {
         NamespacedId currentDimension,
         CallbackInfoReturnable<WorldRenderingPipeline> cir
     ) {
-        if (DSConfig.CACHE_SHADER_UNIFORMS) {
-            ShaderCacheLoader.reload("new Oculus pipeline");
-        }
+        ShaderCacheLoader.reload("new Oculus pipeline");
     }
 }
