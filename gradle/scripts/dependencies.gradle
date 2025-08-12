@@ -62,6 +62,11 @@ dependencies {
 
     modCompileOnly("curse.maven:oculus-581495:5194273")
 
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
+    testImplementation("org.openjdk.jmh:jmh-core:1.37")
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-generator-annprocess
+    testAnnotationProcessor("org.openjdk.jmh:jmh-generator-annprocess:1.37")
+
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
     // will cause loom to remap the file to your specified mappings
