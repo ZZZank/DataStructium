@@ -14,4 +14,7 @@ public interface MachineStructureRecipeDataExtension {
 
     @Nullable
     ResourceLocation dataStruct$tagAsRL();
+
+    @Nullable
+    ResourceLocation dataStruct$blockId();
 }

@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.*;
 import zank.mods.datastructium.mods.masterfulmachinery.MachineStructureRecipeDataExtension;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author ZZZank
@@ -37,8 +38,8 @@ public abstract class MixinMachineStructureRecipe {
 
             boolean valid = false;
 
+            val extension = (MachineStructureRecipeDataExtension) data;
             if (!data.getTag().isEmpty()) {
-                val extension = (MachineStructureRecipeDataExtension) data;
                 if (extension.dataStruct$getColonSplitTag().length != 2) {
                     MM.LOG.fatal("too many : (colons) in structure tag: {}", data.getTag());
                     continue;
@@ -52,7 +53,7 @@ public abstract class MixinMachineStructureRecipe {
 
                 valid = tag.contains(blockState.getBlock());
             } else if (!data.getBlock().isEmpty()) {
-                valid = data.getBlock().equals(blockState.getBlock().getRegistryName().toString());
+                valid = Objects.equals(extension.dataStruct$blockId(), blockState.getBlock().getRegistryName());
             } else if (data.getPort() != null) {
                 val port = data.getPort();
                 val be = world.getBlockEntity(pos);

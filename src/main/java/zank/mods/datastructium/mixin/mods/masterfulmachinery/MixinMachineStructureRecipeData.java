@@ -15,14 +15,22 @@ import zank.mods.datastructium.mods.masterfulmachinery.MachineStructureRecipeDat
 public abstract class MixinMachineStructureRecipeData implements MachineStructureRecipeDataExtension {
     @Unique
     private String[] dataStruct$colonSplitTag;
+
     @Unique
     private ResourceLocation dataStruct$tagRL;
     @Unique
     private boolean dataStruct$tagRLInitialized = false;
 
+    @Unique
+    private ResourceLocation dataStruct$blockId;
+    @Unique
+    private boolean dataStruct$blockIdInitialized = false;
+
     @Shadow
     @Final
     private String tag;
+
+    @Shadow @Final private String block;
 
     @Override
     public @NotNull String[] dataStruct$getColonSplitTag() {
@@ -46,5 +54,14 @@ public abstract class MixinMachineStructureRecipeData implements MachineStructur
             }
         }
         return dataStruct$tagRL;
+    }
+
+    @Override
+    public @Nullable ResourceLocation dataStruct$blockId() {
+        if (!dataStruct$blockIdInitialized) {
+            dataStruct$blockIdInitialized = true;
+            dataStruct$blockId = ResourceLocation.tryParse(this.block);
+        }
+        return dataStruct$blockId;
     }
 }
