@@ -1,3 +1,19 @@
+## DataStructium 1.7.1 -> 1.8.0
+
+Refining optimization approaches
+
+- Improve: better Oculus support for `Cache Shader Uniforms`
+- Add: Ingredient Duplication, disabled by default
+- Remove: `Tiered Tag Internal`, this causes additional object creation when ModernFix is installed, and we can't disable ModernFix optimization
+- Remove: `Deduplicate CompoundTag Keys`, ModernFix did the same thing
+- Add: allow modifying MM structure check interval. By default, DataStructium sets it to be 1 check per 5 ticks (MM default is 1 check per tick)
+- Improve: some optimizations are rewritten to patch in a cleaner way
+- Add: `Clear empty Chunk section automatically`
+- Improve: expand `optimize_small_model`
+- Improve: optimize MM structure block match
+
+---
+
 ## DataStructium 1.7.0 -> 1.7.1
 
 CompoundTag optimization improvement
