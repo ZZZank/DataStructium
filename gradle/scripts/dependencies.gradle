@@ -31,13 +31,6 @@ repositories {
         }
     }
     maven {
-        // saps.dev Maven (KubeJS and Rhino)
-        url = "https://maven.saps.dev/minecraft"
-        content {
-            includeGroup "dev.latvian.mods"
-        }
-    }
-    maven {
         name = 'ModMaven'
         url = "https://modmaven.dev"
     }
@@ -54,9 +47,7 @@ dependencies {
 
     modCompileOnly("curse.maven:just-enough-resources-jer-240630:4526612")
 
-    modCompileOnly("dev.latvian.mods:kubejs-forge:1605.3.19-build.299") {
-        exclude([module: "rhino-forge"])
-    }
+    modImplementation("curse.maven:kubejs-238086:3647098")
 
     modCompileOnly("curse.maven:farmers-delight-398521:3765350")
 
