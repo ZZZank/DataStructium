@@ -1,3 +1,11 @@
+## DataStructium 1.8.0 -> 1.8.1
+
+Fix Botania crash
+
+- Fix crash when Botania is present, due to Batania modifying models in an unexpected way (not quite unexpected actually, but unexpected for me)
+
+---
+
 ## DataStructium 1.7.1 -> 1.8.0
 
 Refining optimization approaches
