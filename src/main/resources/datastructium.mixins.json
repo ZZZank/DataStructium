@@ -9,7 +9,6 @@
     "cache_number_tag.MixinDoubleTag",
     "cache_number_tag.MixinFloatTag",
     "cache_number_tag.MixinIntTag",
-    "clear_empty_chunk_section.MixinLevelChunk",
     "deduplicate_ingredient.MixinIngredient",
     "deduplicate_ingredient.MixinIngredientItemValue",
     "disable_recipe_awarding.MixinServerPlayer",

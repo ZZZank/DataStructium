@@ -43,7 +43,6 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             () -> modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
         );
         override("mods.oculus", () -> modPresent("oculus") && DSConfig.CACHE_SHADER_UNIFORMS);
-        constantOverride("clear_empty_chunk_section", DSConfig.CLEAR_EMPTY_CHUNK_SECTION);
     }
 
     private static boolean modPresent(String modId) {
