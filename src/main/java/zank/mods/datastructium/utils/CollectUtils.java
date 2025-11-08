@@ -74,7 +74,7 @@ public interface CollectUtils {
         if (list.isEmpty()) {
             return Collections.emptyList();
         } else if (list.size() == 1) {
-            return new SingletonMutableList<>(list.get(0));
+            return Collections.singletonList(list.get(0));
         }
         return list;
     }
