@@ -115,7 +115,7 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
         }
 
         val approved = got.getAsBoolean();
-        LOGGER.info("Mixin class '{}' is {} by override", dotMixinClass, approved ? "approved" : "rejected");
+        LOGGER.debug("Mixin class '{}' is {} by override", dotMixinClass, approved ? "approved" : "rejected");
         return approved;
     }
 
