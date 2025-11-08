@@ -43,6 +43,10 @@ public class DataStructiumMixinPlugin implements IMixinConfigPlugin {
             () -> modPresent("masterfulmachinery") && DSConfig.MM_STRUCTURE_CHECK_INTERVAL > 0
         );
         override("mods.oculus", () -> modPresent("oculus") && DSConfig.CACHE_SHADER_UNIFORMS);
+        override(
+            "mods.ftbquests",
+            () -> modPresent("ftbquests") && DSConfig.FTB_QUESTS_ITEM_CHECK_INTERVAL > 0
+        );
     }
 
     private static boolean modPresent(String modId) {

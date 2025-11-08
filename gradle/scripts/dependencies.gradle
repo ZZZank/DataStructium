@@ -53,6 +53,8 @@ dependencies {
 
     modCompileOnly("curse.maven:oculus-581495:5194273")
 
+    modCompileOnly("curse.maven:ftb-quests-forge-289412:4297999")
+
     // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
     testImplementation("org.openjdk.jmh:jmh-core:1.37")
     // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-generator-annprocess

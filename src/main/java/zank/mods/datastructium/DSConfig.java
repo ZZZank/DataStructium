@@ -28,11 +28,13 @@ public final class DSConfig {
     public static final boolean FAST_SECTION_ITERATING;
     public static final boolean DEDUPLICATE_INGREDIENT;
     public static final int MM_STRUCTURE_CHECK_INTERVAL;
+    public static final int FTB_QUESTS_ITEM_CHECK_INTERVAL;
 
     static {
-        val cfg = new SimpleConfig();
-        CONFIG = cfg;
+        CONFIG = new SimpleConfig();
         read();
+
+        val cfg = CONFIG;
         DISABLE_ALL_MIXINS = cfg.getBool("Disable All Mixins", false);
         CANONICALIZE_QUADS = cfg.getBool("Canonicalize Quads", false);
         CACHE_SHADER_UNIFORMS = cfg.getBool("Cache Shader Uniforms", true);
@@ -46,6 +48,7 @@ public final class DSConfig {
         FAST_SECTION_ITERATING = cfg.getBool("Faster chunk section iterating", true);
         DEDUPLICATE_INGREDIENT = cfg.getBool("Deduplicate Item Ingredient", false);
         MM_STRUCTURE_CHECK_INTERVAL = cfg.getInt("MasterfulMachinery structure check interval (in ticks, set to 0 or less to disable this feature)", 5);
+        FTB_QUESTS_ITEM_CHECK_INTERVAL = cfg.getInt("FTBQuests item requirement check interval (in ticks, set to 0 or less to disable)", 20);
     }
 
     static void save() {

@@ -15,6 +15,7 @@
     "fast_section_iterating.MixinSectionPos",
     "misc.MixinScanner",
     "mods.farmersdelight.MixinToolIngredient",
+    "mods.ftbquests.MixinFTBQuestsInventoryListener",
     "mods.jeresources.MixinMobWrapper",
     "mods.kubejs.MixinKubeJSResourcePack",
     "mods.masterfulmachinery.MixinMachineStructureRecipe",

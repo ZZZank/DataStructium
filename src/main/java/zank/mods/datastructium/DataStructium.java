@@ -2,9 +2,12 @@ package zank.mods.datastructium;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import zank.mods.datastructium.mods.ftbquests.QueuedFTBQuestInvListener;
 
 /**
  * @author ZZZank
@@ -19,5 +22,9 @@ public class DataStructium {
 
     public DataStructium() {
         DSConfig.save();
+
+        if (ModList.get().isLoaded("ftbquests") && DSConfig.FTB_QUESTS_ITEM_CHECK_INTERVAL > 0) {
+            MinecraftForge.EVENT_BUS.addListener(QueuedFTBQuestInvListener.INSTANCE);
+        }
     }
 }
