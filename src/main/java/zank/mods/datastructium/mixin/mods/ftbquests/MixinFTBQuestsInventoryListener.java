@@ -9,14 +9,15 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import zank.mods.datastructium.mods.ftbquests.QueuedFTBQuestInvListener;
 
 @Mixin(FTBQuestsInventoryListener.class)
-public class MixinFTBQuestsInventoryListener {
+public abstract class MixinFTBQuestsInventoryListener {
 
     @Redirect(
         method = {"slotChanged", "refreshContainer"},
         at = @At(
             value = "INVOKE",
-            target = "Ldev/ftb/mods/ftbquests/util/FTBQuestsInventoryListener;detect(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;J)V",
-            remap = false
+            target = "Ldev/ftb/mods/ftbquests/util/FTBQuestsInventoryListener;detect(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;J)V"
+            // "why not remap=false", you might ask
+            // Well, this is making mixin unable to find target, and I don't know why
         )
     )
     private void redirectInvDetect(ServerPlayer player, ItemStack craftedItem, long sourceTask) {
